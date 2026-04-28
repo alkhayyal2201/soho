@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soho Group — Training Calendar May 2026 – April 2027</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config={theme:{extend:{colors:{cream:{50:'#FDFCFA',100:'#FAF7F2',200:'#F5EFE3',300:'#EDE5D5'},gold:{50:'#FBF6ED',100:'#F5EFE3',200:'#E8D5B0',300:'#D4B978',400:'#C9A96E',500:'#A8894F',600:'#8B7240',700:'#6E5A32'},charcoal:{50:'#8A8178',100:'#6B6560',200:'#4A4540',300:'#2C2C2C'}},fontFamily:{playfair:['"Playfair Display"','serif'],lato:['Lato','sans-serif']}}}}
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Lato',sans-serif}
+        .soho-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.013;background-image:url('https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f');background-repeat:repeat;background-size:150px auto}
+        .bg-pattern{background-image:radial-gradient(ellipse at 15% 30%,rgba(201,169,110,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(201,169,110,.04) 0%,transparent 50%),radial-gradient(ellipse at 50% 85%,rgba(201,169,110,.05) 0%,transparent 55%)}
+        .soho-logo-wrap{position:relative;display:inline-block}
+        .soho-logo-wrap::before{content:'';position:absolute;inset:-3px;border-radius:6px;background:linear-gradient(135deg,#C9A96E,#D4B978,#A8894F,#C9A96E);background-size:300% 300%;animation:logoBorderShift 4s ease infinite;z-index:0;opacity:0;transition:opacity .5s}
+        .soho-logo-wrap:hover::before{opacity:1}
+        .soho-logo-wrap::after{content:'';position:absolute;inset:0;border-radius:4px;overflow:hidden;background:linear-gradient(105deg,transparent 40%,rgba(212,185,120,.15) 45%,rgba(212,185,120,.25) 50%,rgba(212,185,120,.15) 55%,transparent 60%);background-size:200% 100%;animation:logoShimmer 3s ease-in-out infinite;z-index:2;pointer-events:none}
+        @keyframes logoBorderShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        @keyframes logoShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+        .soho-logo-img{position:relative;z-index:1;display:block;border-radius:4px;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+        .soho-logo-wrap:hover .soho-logo-img{transform:scale(1.05)}
+        .hero-logo-merged{position:relative}
+        .hero-logo-merged::before{content:'';position:absolute;inset:-24px;border-radius:24px;background:conic-gradient(from 0deg,#C9A96E,#D4B978,#A8894F,#C9A96E,#D4B978);animation:conicSpin 6s linear infinite;opacity:.12;filter:blur(25px);z-index:0}
+        @keyframes conicSpin{to{transform:rotate(360deg)}}
+        .hero-logo-merged img{position:relative;z-index:1;border-radius:12px;animation:logoFloat 5s ease-in-out infinite}
+        @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        @keyframes logoGlow{0%,100%{box-shadow:0 0 20px rgba(201,169,110,.1),0 0 60px rgba(201,169,110,.05)}50%{box-shadow:0 0 40px rgba(201,169,110,.25),0 0 100px rgba(201,169,110,.12)}}
+        .logo-glow{animation:logoGlow 4s ease-in-out infinite}
+        .soho-bg-text{position:absolute;font-family:'Lato',sans-serif;font-weight:300;font-size:clamp(100px,18vw,260px);letter-spacing:.15em;color:rgba(201,169,110,.035);pointer-events:none;user-select:none;line-height:1;white-space:nowrap}
+        .soho-divider{display:flex;align-items:center;gap:16px;justify-content:center}
+        .soho-divider img{height:18px;width:auto;opacity:.25}
+        .soho-divider .line{flex:1;max-width:100px;height:1px;background:linear-gradient(to right,transparent,#C9A96E50,transparent)}
+
+        .month-card{transition:all .45s cubic-bezier(.25,.46,.45,.94);cursor:pointer;position:relative;overflow:hidden}
+        .month-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+        .month-card:hover::after{transform:scaleX(1)}
+        .month-card:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(44,44,44,.1),0 0 0 1px rgba(201,169,110,.25)}
+        .month-card:hover .month-emoji{transform:scale(1.25) rotate(-8deg)}
+        .month-emoji{transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+        .month-card:hover .game-subtitle{opacity:1;max-height:50px;margin-top:4px}
+        .game-subtitle{opacity:0;max-height:0;overflow:hidden;transition:all .4s ease}
+        .card-soho-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.025;pointer-events:none;z-index:0}
+
+        .haunted-card{background:linear-gradient(160deg,#1a1a2e 0%,#16213e 40%,#1a1a2e 100%)!important;border-color:rgba(106,200,150,.25)!important}
+        .haunted-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 75%,rgba(106,200,150,.12),transparent 55%),radial-gradient(ellipse at 75% 25%,rgba(80,80,160,.08),transparent 55%);border-radius:inherit;z-index:1;pointer-events:none;animation:fogDrift 8s ease-in-out infinite alternate}
+        @keyframes fogDrift{0%{opacity:.6;transform:translateX(-3px)}100%{opacity:1;transform:translateX(3px)}}
+        .haunted-card .card-soho-mark{filter:hue-rotate(120deg) brightness(2);opacity:.04!important;animation:ghostFlicker 4s ease-in-out infinite}
+        @keyframes ghostFlicker{0%,100%{opacity:.04}25%{opacity:.07}50%{opacity:.03}75%{opacity:.06}}
+        .haunted-card .month-emoji{filter:drop-shadow(0 0 12px rgba(106,200,150,.5))}
+        .haunted-card h3,.haunted-card .card-sub,.haunted-card .card-topic,.haunted-card .card-game{color:rgba(230,230,230,.85)!important}
+        .haunted-card:hover{box-shadow:0 25px 60px rgba(26,26,46,.4),0 0 0 1px rgba(106,200,150,.35),0 0 40px rgba(106,200,150,.08)!important}
+        .haunted-card::after{background:linear-gradient(to right,#6ac896,#4a9070)!important}
+        .spider-corner{position:absolute;width:50px;height:50px;z-index:2;pointer-events:none;opacity:.15}
+        .spider-corner.tl{top:6px;left:6px;border-top:1px solid #6ac896;border-left:1px solid #6ac896}
+        .spider-corner.br{bottom:6px;right:6px;border-bottom:1px solid #6ac896;border-right:1px solid #6ac896}
+        .spider-corner .web-line{position:absolute;background:#6ac896}
+        .spider-corner.tl .web-line.h{top:0;left:0;width:100%;height:1px;transform:rotate(25deg);transform-origin:left}
+        .spider-corner.tl .web-line.v{top:0;left:0;width:1px;height:100%;transform:rotate(-25deg);transform-origin:top}
+        .spider-corner.br .web-line.h{bottom:0;right:0;width:100%;height:1px;transform:rotate(-25deg);transform-origin:right}
+        .spider-corner.br .web-line.v{bottom:0;right:0;width:1px;height:100%;transform:rotate(25deg);transform-origin:bottom}
+        .ghost-dot{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(106,200,150,.3);animation:ghostFloat 6s ease-in-out infinite;pointer-events:none;z-index:2}
+        @keyframes ghostFloat{0%,100%{transform:translateY(0) scale(1);opacity:.3}50%{transform:translateY(-15px) scale(1.5);opacity:.6}}
+
+        .advent-card{background:linear-gradient(160deg,#fff9f0,#fffdf8 50%,#fff5e8)!important;border-color:rgba(200,120,80,.3)!important}
+        .advent-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(212,168,83,.06),transparent 70%);border-radius:inherit;z-index:1;pointer-events:none;animation:candleGlow 3s ease-in-out infinite}
+        @keyframes candleGlow{0%,100%{opacity:.7}50%{opacity:1}}
+        .advent-card .card-soho-mark{opacity:.035!important;filter:sepia(.3) saturate(1.5)}
+        .advent-card:hover{box-shadow:0 25px 60px rgba(212,168,83,.12),0 0 0 1px rgba(200,120,80,.35)!important}
+        .advent-card::after{background:linear-gradient(to right,#c87850,#D4A853)!important}
+        .sparkle-dot{position:absolute;width:2px;height:2px;border-radius:50%;background:#C9A96E;pointer-events:none;z-index:2}
+        @keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+
+        .race-card{background:linear-gradient(160deg,#f0f4f8,#f8f9fb 50%,#eef2f7)!important;border-color:rgba(100,140,180,.25)!important}
+        .race-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(100,140,180,.04) 18px,rgba(100,140,180,.04) 20px),repeating-linear-gradient(0deg,transparent,transparent 18px,rgba(100,140,180,.04) 18px,rgba(100,140,180,.04) 20px);border-radius:inherit;z-index:1;pointer-events:none}
+        .race-card:hover{box-shadow:0 25px 60px rgba(100,140,180,.1),0 0 0 1px rgba(100,140,180,.3)!important}
+        .race-card::after{background:linear-gradient(to right,#648cb4,#8baed0)!important}
+
+        .modal-overlay{opacity:0;pointer-events:none;transition:opacity .35s ease;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+        .modal-overlay.active{opacity:1;pointer-events:all}
+        .modal-content{transform:translateY(40px) scale(.97);opacity:0;transition:all .45s cubic-bezier(.25,.46,.45,.94)}
+        .modal-overlay.active .modal-content{transform:translateY(0) scale(1);opacity:1}
+        .modal-soho-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:#2C2C2C;z-index:5}
+
+        .haunted-header{background:linear-gradient(160deg,#1a1a2e,#16213e)!important;border-bottom-color:rgba(106,200,150,.2)!important;position:relative;overflow:hidden}
+        .haunted-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(106,200,150,.08),transparent 60%);pointer-events:none}
+        .haunted-header .modal-soho-stripe{background:linear-gradient(to right,#6ac896,#1a1a2e,#6ac896)!important}
+
+        .advent-door{aspect-ratio:1;border:2px solid #E8D5B0;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;transition:all .35s ease;cursor:default;background:#fffdf8}
+        .advent-door .door-num{font-size:14px;font-weight:700;color:#8A8178;transition:color .3s}
+        .advent-door.golden{background:linear-gradient(145deg,#C9A96E,#D4B978);border-color:#A8894F;cursor:pointer}
+        .advent-door.golden .door-num{color:#fff;font-size:16px}
+        .advent-door.golden:hover{transform:translateY(-5px) scale(1.05);box-shadow:0 12px 30px rgba(201,169,110,.45)}
+        .advent-door.golden .door-label{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;opacity:0;font-size:8px;color:rgba(255,255,255,.9);text-align:center;padding:0 4px;line-height:1.2;font-weight:600;letter-spacing:.02em}
+        .advent-door.golden:hover .door-label{max-height:40px;opacity:1;margin-top:3px}
+        .advent-door .soho-seal{position:absolute;bottom:3px;right:3px;opacity:.2;width:16px;height:auto;pointer-events:none}
+        .advent-door.golden .soho-seal{opacity:.35}
+        .advent-door.resting{opacity:.55}
+        .advent-door.resting:hover{opacity:.8;transform:translateY(-2px)}
+        @keyframes doorPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.3)}50%{box-shadow:0 0 0 6px rgba(201,169,110,0)}}
+        .advent-door.golden{animation:doorPulse 3s ease-in-out infinite}
+
+        .gold-line{height:1px;background:linear-gradient(to right,transparent,#C9A96E,transparent)}
+        .accent-bar{width:50px;height:2px;background:linear-gradient(to right,#C9A96E,#D4B978)}
+        .ornament{display:inline-flex;align-items:center;gap:10px;color:#C9A96E;font-size:10px;letter-spacing:.2em}
+        .ornament::before,.ornament::after{content:'';width:50px;height:1px;background:#C9A96E}
+
+        .cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:50%;transition:all .2s ease;margin:0 auto}
+        .cal-day.is-training{background:linear-gradient(135deg,#C9A96E,#D4B978);color:#fff;font-weight:700;box-shadow:0 3px 10px rgba(201,169,110,.4)}
+        .cal-day.is-haunted{background:linear-gradient(135deg,#6ac896,#4a9070);color:#fff;font-weight:700;box-shadow:0 3px 10px rgba(106,200,150,.4)}
+        .cal-day.is-empty{visibility:hidden}
+
+        .key-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px}
+        .session-row{transition:background .2s ease;border-radius:8px}
+        .session-row:hover{background:rgba(201,169,110,.06)}
+        .game-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.05em}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+        .anim-in{animation:fadeUp .7s cubic-bezier(.25,.46,.45,.94) forwards;opacity:0}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        .float-anim{animation:float 4s ease-in-out infinite}
+        .year-badge{display:inline-flex;align-items:center;gap:8px;background:#2C2C2C;color:#fff;padding:6px 18px;border-radius:100px;font-size:11px;letter-spacing:.25em;font-weight:700}
+        .year-badge .dot{width:4px;height:4px;border-radius:50%;background:#C9A96E}
+        .scroll-hide::-webkit-scrollbar{display:none}
+        .scroll-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .section-soho-bg{position:relative}
+        .section-soho-bg::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;height:70px;background-image:url('https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f');background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.02;pointer-events:none}
+
+        /* ===== SCROLL EMOJI POPUP — REDESIGNED ===== */
+        .scroll-popup{position:fixed;right:28px;top:50%;transform:translateY(-50%) scale(0);z-index:55;opacity:0;pointer-events:none;transition:none}
+        .scroll-popup.entering{animation:spEnter .55s cubic-bezier(.34,1.56,.64,1) forwards;pointer-events:all}
+        .scroll-popup.idle{transform:translateY(-50%) scale(1);opacity:1;pointer-events:all;animation:spIdle 3.5s ease-in-out infinite}
+        .scroll-popup.exiting{animation:spExit .3s cubic-bezier(.25,.46,.45,.94) forwards;pointer-events:none}
+        @keyframes spEnter{
+            0%{transform:translateY(-50%) scale(0) rotate(-20deg);opacity:0}
+            50%{transform:translateY(-50%) scale(1.2) rotate(5deg);opacity:1}
+            70%{transform:translateY(-50%) scale(.9) rotate(-2deg);opacity:1}
+            100%{transform:translateY(-50%) scale(1) rotate(0deg);opacity:1}
+        }
+        @keyframes spIdle{
+            0%,100%{transform:translateY(-50%) scale(1) rotate(0deg);filter:drop-shadow(0 0 0px transparent)}
+            25%{transform:translateY(calc(-50% - 6px)) scale(1.06) rotate(-3deg);filter:drop-shadow(0 8px 20px var(--sp-glow))}
+            50%{transform:translateY(-50%) scale(1) rotate(0deg);filter:drop-shadow(0 0 0px transparent)}
+            75%{transform:translateY(calc(-50% - 4px)) scale(1.04) rotate(2deg);filter:drop-shadow(0 6px 16px var(--sp-glow))}
+        }
+        @keyframes spExit{
+            0%{transform:translateY(-50%) scale(1);opacity:1}
+            100%{transform:translateY(calc(-50% + 20px)) scale(.6);opacity:0}
+        }
+        .scroll-popup-btn{width:80px;height:80px;border-radius:24px;border:none;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:box-shadow .3s ease;box-shadow:0 8px 32px rgba(44,44,44,.1),0 0 0 1px rgba(201,169,110,.12)}
+        .scroll-popup-btn::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(ellipse at 50% 60%,var(--sp-bg),transparent 70%);opacity:.5;pointer-events:none}
+        .scroll-popup-btn:hover{box-shadow:0 12px 44px rgba(44,44,44,.15),0 0 0 2px var(--sp-ring),0 0 40px var(--sp-glow);transform:scale(1.08)}
+        .scroll-popup-btn:active{transform:scale(.92);transition:transform .1s ease}
+        .sp-emoji{font-size:44px;line-height:1;position:relative;z-index:1;transition:transform .2s ease}
+        @media(max-width:640px){.scroll-popup{right:16px}.scroll-popup-btn{width:64px;height:64px;border-radius:18px}.sp-emoji{font-size:34px}}
+
+        /* Edit Mode */
+        .edit-btn{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;font-size:11px;letter-spacing:.1em;font-weight:700;transition:all .3s ease;border:1px solid #E8D5B0;background:transparent;color:#6B6560;cursor:pointer;text-transform:uppercase}
+        .edit-btn:hover{border-color:#C9A96E;color:#A8894F;background:rgba(201,169,110,.06)}
+        .edit-btn.active{background:#2C2C2C;color:#fff;border-color:#2C2C2C}
+        .edit-btn.active:hover{background:#4A4540;border-color:#4A4540}
+        body.edit-mode .month-card::after{content:'';position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(201,169,110,.15);z-index:5;animation:editPulse 2s ease-in-out infinite}
+        @keyframes editPulse{0%,100%{opacity:.6}50%{opacity:1}}
+        .edit-indicator{position:fixed;top:56px;left:0;right:0;height:3px;background:linear-gradient(to right,#C9A96E,#D4B978,#C9A96E);background-size:200% 100%;animation:editShimmer 2s ease infinite;z-index:49;display:none}
+        body.edit-mode .edit-indicator{display:block}
+        @keyframes editShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+        body.edit-mode .cal-day:not(.is-empty){cursor:pointer}
+        body.edit-mode .cal-day:not(.is-empty):hover{outline:2px dashed #C9A96E;outline-offset:2px}
+        body.edit-mode .cal-day:not(.is-empty):active{transform:scale(.85)}
+        @keyframes dayToggle{0%{transform:scale(1)}50%{transform:scale(.7)}100%{transform:scale(1)}}
+        .day-toggled{animation:dayToggle .3s ease}
+
+        .edit-input{background:transparent;border:1px dashed rgba(201,169,110,.4);border-radius:6px;padding:4px 8px;font-size:13px;font-family:'Lato',sans-serif;color:#2C2C2C;width:100%;transition:all .2s ease;outline:none}
+        .edit-input:focus{border-color:#C9A96E;background:rgba(201,169,110,.04);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
+        .edit-input-sm{width:70px;text-align:center;padding:3px 4px;font-size:12px}
+        .edit-input-time{width:150px;font-size:12px}
+        .session-delete{width:26px;height:26px;border-radius:50%;border:1px solid rgba(200,80,80,.2);background:transparent;color:rgba(200,80,80,.5);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s ease;flex-shrink:0}
+        .session-delete:hover{background:rgba(200,80,80,.08);border-color:rgba(200,80,80,.4);color:rgba(200,80,80,.8)}
+
+        .file-zone{border:2px dashed rgba(201,169,110,.25);border-radius:12px;padding:20px;text-align:center;transition:all .3s ease;cursor:pointer;background:rgba(201,169,110,.02)}
+        .file-zone:hover,.file-zone.dragover{border-color:#C9A96E;background:rgba(201,169,110,.06)}
+        .file-zone.dragover{transform:scale(1.01)}
+        .file-chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(201,169,110,.15);border-radius:10px;background:#fff;transition:all .2s ease}
+        .file-chip:hover{border-color:rgba(201,169,110,.35);box-shadow:0 4px 12px rgba(44,44,44,.06)}
+        .file-chip-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .file-chip-icon.doc{background:rgba(66,133,244,.1);color:#4285f4}
+        .file-chip-icon.sheet{background:rgba(52,168,83,.1);color:#34a853}
+        .file-chip-icon.pdf{background:rgba(234,67,53,.1);color:#ea4335}
+        .file-chip-icon.img{background:rgba(168,89,50,.1);color:#a85932}
+        .file-chip-icon.other{background:rgba(138,129,120,.1);color:#8A8178}
+        .file-chip-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
+        .file-chip-btn{width:28px;height:28px;border-radius:6px;border:1px solid rgba(201,169,110,.15);background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s ease;color:#8A8178}
+        .file-chip-btn:hover{background:rgba(201,169,110,.08);border-color:rgba(201,169,110,.3);color:#A8894F}
+        .file-chip-btn.danger:hover{background:rgba(200,80,80,.06);border-color:rgba(200,80,80,.25);color:rgba(200,80,80,.7)}
+        .file-size{font-size:11px;color:#8A8178;font-weight:300}
+        .add-session-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px dashed rgba(201,169,110,.3);background:transparent;color:#A8894F;font-size:12px;font-weight:600;cursor:pointer;transition:all .25s ease;letter-spacing:.05em}
+        .add-session-btn:hover{border-color:#C9A96E;background:rgba(201,169,110,.06);transform:translateY(-1px)}
+        .reset-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;border:1px solid rgba(200,80,80,.2);background:transparent;color:rgba(200,80,80,.6);font-size:10px;font-weight:700;cursor:pointer;transition:all .2s ease;letter-spacing:.1em;text-transform:uppercase}
+        .reset-btn:hover{background:rgba(200,80,80,.06);border-color:rgba(200,80,80,.4);color:rgba(200,80,80,.9)}
+
+        .toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+        .toast{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;pointer-events:auto;animation:toastIn .35s ease forwards;box-shadow:0 8px 30px rgba(44,44,44,.15)}
+        .toast.success{background:#2C2C2C;color:#fff}
+        .toast.info{background:#fff;color:#2C2C2C;border:1px solid rgba(201,169,110,.3)}
+        .toast.error{background:rgba(200,80,80,.9);color:#fff}
+        .toast.out{animation:toastOut .3s ease forwards}
+        @keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(.95)}}
+
+        .confirm-overlay{position:fixed;inset:0;z-index:300;background:rgba(44,44,44,.3);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease}
+        .confirm-overlay.active{opacity:1;pointer-events:all}
+        .confirm-box{background:#fff;border-radius:16px;padding:28px;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(44,44,44,.2);border:1px solid rgba(201,169,110,.2);transform:scale(.95);transition:transform .25s ease}
+        .confirm-overlay.active .confirm-box{transform:scale(1)}
+    </style>
+</head>
+<body class="bg-cream-100 text-charcoal-300 bg-pattern min-h-screen">
+    <div class="soho-watermark"></div>
+    <div class="edit-indicator"></div>
+
+    <!-- Scroll Emoji Popup — Icon only, no words -->
+    <div id="scrollPopup" class="scroll-popup">
+        <button class="scroll-popup-btn" id="scrollPopupBtn" onclick="scrollPopupClick()">
+            <span class="sp-emoji" id="spEmoji">📅</span>
+        </button>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <p id="confirmMsg" class="text-sm font-medium text-charcoal-300 mb-5 leading-relaxed"></p>
+            <div class="flex gap-3 justify-end">
+                <button id="confirmCancel" class="px-4 py-2 rounded-lg border border-gold-200 text-charcoal-100 text-xs font-bold tracking-wider uppercase hover:bg-gold-50 transition-all">Cancel</button>
+                <button id="confirmOk" class="px-4 py-2 rounded-lg bg-charcoal-300 text-white text-xs font-bold tracking-wider uppercase hover:bg-charcoal-200 transition-all">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" multiple accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.jpg,.jpeg,.png,.gif" style="display:none">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream-100/85 backdrop-blur-lg border-b border-gold-200/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="soho-logo-wrap">
+                <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="soho-logo-img h-9 w-auto object-contain">
+            </div>
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button id="editToggle" class="edit-btn" onclick="toggleEditMode()">
+                    <span class="iconify" data-icon="lucide:pencil" data-width="13"></span>
+                    <span class="hidden sm:inline">Edit</span>
+                </button>
+                <span id="saveStatus" class="text-[10px] tracking-[.25em] uppercase font-light text-charcoal-50 hidden" style="letter-spacing:.2em"></span>
+                <span class="hidden md:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Training Calendar</span>
+                <div class="year-badge"><span class="dot"></span>2026 — 2027</div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-28 sm:pt-36 pb-14 sm:pb-20 px-6 text-center overflow-hidden">
+        <div class="soho-bg-text" style="top:50%;left:50%;transform:translate(-50%,-50%)">SOHO</div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="ornament mb-6 anim-in" style="animation-delay:.1s">SOHO GROUP</div>
+            <div class="mb-8 anim-in" style="animation-delay:.2s">
+                <div class="hero-logo-merged logo-glow inline-block">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="w-44 sm:w-56 md:w-64 h-auto">
+                </div>
+            </div>
+            <h1 class="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] mb-5 anim-in" style="animation-delay:.35s">
+                Training<br><span class="italic text-gold-500">Calendar</span>
+            </h1>
+            <p class="text-charcoal-50 text-lg sm:text-xl font-light max-w-xl mx-auto leading-relaxed mb-6 anim-in" style="animation-delay:.45s">
+                Level up your skills — one month at a time.<br class="hidden sm:block"> Where luxury meets the art of mastery.
+            </p>
+            <div class="soho-divider mb-6 anim-in" style="animation-delay:.5s">
+                <div class="line"></div>
+                <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO">
+                <div class="line"></div>
+            </div>
+            <div class="anim-in" style="animation-delay:.55s">
+                <div class="inline-flex items-center gap-3 bg-white rounded-full px-6 py-3 border border-gold-200/50 shadow-sm">
+                    <span class="iconify text-gold-400" data-icon="lucide:calendar-range" data-width="18"></span>
+                    <span class="text-sm font-medium text-charcoal-200">May 2026</span>
+                    <div class="w-8 h-px bg-gold-300"></div>
+                    <span class="iconify text-gold-400" data-icon="lucide:arrow-right" data-width="14"></span>
+                    <div class="w-8 h-px bg-gold-300"></div>
+                    <span class="text-sm font-medium text-charcoal-200">April 2027</span>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10 anim-in" style="animation-delay:.65s">
+                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500">9</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Core Topics</div></div>
+                <div class="w-px h-12 bg-gold-200"></div>
+                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500">12</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Months</div></div>
+                <div class="w-px h-12 bg-gold-200"></div>
+                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500" id="statSessions">48</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Sessions</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative pb-24 px-6 section-soho-bg">
+        <div class="relative z-10 max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="ornament mb-4">EXPLORE</div>
+                <h2 class="font-playfair text-2xl sm:text-3xl font-semibold tracking-tight">Select a Month</h2>
+                <p class="text-charcoal-50 text-sm mt-3 font-light" id="gridSubtitle">Each month is linked to a classic game — hover to discover the metaphor</p>
+            </div>
+            <div id="monthGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal-overlay fixed inset-0 z-[100] flex items-start justify-center bg-charcoal-300/30 p-4 sm:p-8 overflow-y-auto scroll-hide">
+        <div class="modal-content bg-cream-50 rounded-2xl shadow-2xl w-full max-w-4xl my-8 sm:my-12 border border-gold-200/60 overflow-hidden relative">
+            <div class="modal-soho-stripe"></div>
+            <div id="modalHeader" class="relative px-6 sm:px-10 pt-10 pb-6 border-b border-gold-200/40">
+                <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full border border-gold-200 flex items-center justify-center text-charcoal-50 hover:bg-gold-50 hover:text-gold-600 transition-all z-10 bg-cream-50/80 backdrop-blur-sm">
+                    <span class="iconify" data-icon="lucide:x" data-width="16"></span>
+                </button>
+                <div id="modalTitleArea"></div>
+            </div>
+            <div class="px-6 sm:px-10 py-8 relative">
+                <div class="absolute bottom-4 right-6 opacity-[.018] pointer-events:none z-0">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="" class="w-44 h-auto">
+                </div>
+                <div class="relative z-10 grid lg:grid-cols-5 gap-8 lg:gap-10">
+                    <div class="lg:col-span-3 space-y-8">
+                        <div id="modalGameCard" class="rounded-xl border p-5"></div>
+                        <div id="modalDescription" class="text-charcoal-100 leading-relaxed text-[15px] font-light"></div>
+                        <div><h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold mb-4">Key Learning Points</h4><div id="modalKeyPoints" class="space-y-2.5"></div></div>
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold">Training Sessions</h4>
+                                <button id="addSessionBtn" class="add-session-btn hidden" onclick="addSession()">
+                                    <span class="iconify" data-icon="lucide:plus" data-width="14"></span> Add Session
+                                </button>
+                            </div>
+                            <div id="modalSessions"></div>
+                        </div>
+                        <div id="attachmentsSection" class="hidden">
+                            <h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold mb-4">
+                                <span class="iconify inline-block align-middle mr-1" data-icon="lucide:paperclip" data-width="14"></span>
+                                Attached Materials
+                            </h4>
+                            <div id="fileList" class="space-y-2 mb-4"></div>
+                            <div id="fileZone" class="file-zone" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                                <span class="iconify text-gold-300 mb-2" data-icon="lucide:upload-cloud" data-width="28"></span>
+                                <p class="text-sm text-charcoal-100 font-medium">Drop files here or click to browse</p>
+                                <p class="text-xs text-charcoal-50 mt-1">Word, Excel, PDF, PPT, Images — up to 50 MB each</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <div id="modalCalWrap" class="bg-white rounded-xl border border-gold-200/50 p-5 shadow-sm sticky top-24">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold" id="modalCalTitle"></h4>
+                                <span id="calEditHint" class="hidden text-[10px] text-gold-400 font-medium tracking-wider uppercase">
+                                    <span class="iconify inline-block align-middle" data-icon="lucide:mouse-pointer-click" data-width="11"></span> Click days
+                                </span>
+                            </div>
+                            <div id="modalCalendar"></div>
+                            <div id="modalCalLegend" class="mt-4 pt-3 border-t border-gold-100 flex items-center gap-2 justify-center">
+                                <div class="w-3 h-3 rounded-full bg-gradient-to-br from-gold-400 to-gold-300"></div>
+                                <span class="text-xs text-charcoal-50">Training Day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="relative border-t border-gold-200/40 py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-5">
+            <div class="soho-logo-wrap">
+                <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="soho-logo-img h-8 w-auto object-contain opacity-50">
+            </div>
+            <p class="text-xs text-charcoal-50 font-light text-center">© 2026 Soho Group. All Rights Reserved.<br>Crafted with Excellence.</p>
+        </div>
+    </footer>
+
+<script>
+var LOGO='https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f';
+var DB_NAME='SohoTrainingDB',DB_VER=1,STORE='attachments';
+
+var defaultData=[];
+
+/* ===== INDEXED DB ===== */
+function openDB(){return new Promise(function(res,rej){var r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=function(e){var db=e.target.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE,{keyPath:'id'})};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})}
+function dbPut(item){return openDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(item);tx.oncomplete=function(){res()};tx.onerror=function(){rej(tx.error)}})})}
+function dbGet(id){return openDB().then(function(db){return new Promise(function(res,rej){var r=db.transaction(STORE,'readonly').objectStore(STORE).get(id);r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})})}
+function dbDelete(id){return openDB().then(function(db){return new Promise(function(res,rej){var tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=function(){res()};tx.onerror=function(){rej(tx.error)}})})}
+function dbGetByPrefix(prefix){return openDB().then(function(db){return new Promise(function(res,rej){var r=db.transaction(STORE,'readonly').objectStore(STORE).getAll();r.onsuccess=function(){var all=r.result||[];res(all.filter(function(i){return i.id&&i.id.startsWith(prefix)}))};r.onerror=function(){rej(r.error)}})})}
+
+/* ===== STATE ===== */
+var editMode=false,currentModalIdx=-1,pendingFileIdx=-1;
+
+/* ===== DATA (autosave to Netlify Blobs via /api/data) ===== */
+var DATA_URL='/api/data';
+function getData(){return defaultData;}
+var _saveTimer=null,_savePending=false,_saveInflight=false;
+function setSaveStatus(text,cls){
+    var el=document.getElementById('saveStatus');if(!el)return;
+    if(!text){el.classList.add('hidden');el.textContent='';return;}
+    el.classList.remove('hidden');el.textContent=text;
+    el.style.color=cls==='error'?'#b94a4a':(cls==='ok'?'#A8894F':'#8A8178');
+}
+function scheduleSave(){
+    _savePending=true;
+    setSaveStatus('Saving…');
+    if(_saveTimer)clearTimeout(_saveTimer);
+    _saveTimer=setTimeout(flushSave,600);
+}
+function flushSave(){
+    if(_saveInflight){return;}
+    if(!_savePending)return;
+    _savePending=false;_saveInflight=true;
+    fetch(DATA_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(defaultData)})
+        .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);})
+        .then(function(){_saveInflight=false;if(_savePending){flushSave();}else{setSaveStatus('Saved','ok');setTimeout(function(){setSaveStatus('');},1200);}})
+        .catch(function(e){_saveInflight=false;console.error('Save failed',e);setSaveStatus('Save failed','error');toast('Save failed: '+e.message,'error');});
+}
+function saveDays(){scheduleSave();}
+function saveSessions(){scheduleSave();}
+function hasEdits(){return false;}
+
+/* ===== TOAST ===== */
+function toast(msg,type){type=type||'info';var c=document.getElementById('toastContainer'),t=document.createElement('div');t.className='toast '+type;t.textContent=msg;c.appendChild(t);setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove()},300)},2500)}
+
+/* ===== CONFIRM ===== */
+var confirmCb=null;
+function showConfirm(msg,cb){document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmOverlay').classList.add('active');confirmCb=cb}
+document.getElementById('confirmCancel').onclick=function(){document.getElementById('confirmOverlay').classList.remove('active');confirmCb=null};
+document.getElementById('confirmOk').onclick=function(){document.getElementById('confirmOverlay').classList.remove('active');if(confirmCb)confirmCb();confirmCb=null};
+
+/* ===== EDIT MODE ===== */
+function toggleEditMode(){
+    editMode=!editMode;
+    document.body.classList.toggle('edit-mode',editMode);
+    var btn=document.getElementById('editToggle');
+    btn.classList.toggle('active',editMode);
+    btn.innerHTML=editMode?'<span class="iconify" data-icon="lucide:check" data-width="13"></span><span class="hidden sm:inline">Editing</span>':'<span class="iconify" data-icon="lucide:pencil" data-width="13"></span><span class="hidden sm:inline">Edit</span>';
+    document.getElementById('gridSubtitle').textContent=editMode?'Click any month to edit training days, sessions, and attach files — changes save automatically':'Each month is linked to a classic game — hover to discover the metaphor';
+    if(currentModalIdx>=0)openModal(currentModalIdx);
+    toast(editMode?'Edit mode enabled — changes save automatically':'Edit mode disabled','info');
+}
+
+/* ===== SCROLL EMOJI POPUP ===== */
+var currentPopupIdx=-1,scrollTimer,popupState='hidden';
+
+function initScrollPopup(){
+    var cards=document.querySelectorAll('.month-card');
+    var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting){
+                var idx=parseInt(e.target.dataset.idx);
+                if(idx!==currentPopupIdx){currentPopupIdx=idx;updatePopupStyle(idx);showPopup()}
+            }
+        });
+    },{threshold:0.35,rootMargin:'-10% 0px -10% 0px'});
+    cards.forEach(function(c){obs.observe(c)});
+    window.addEventListener('scroll',function(){showPopup();clearTimeout(scrollTimer);scrollTimer=setTimeout(hidePopup,2200)},{passive:true});
+    document.getElementById('modal').addEventListener('transitionend',function(e){
+        if(e.propertyName==='opacity'&&!document.getElementById('modal').classList.contains('active'))hidePopup();
+    });
+}
+function updatePopupStyle(idx){
+    var m=getData()[idx];
+    document.getElementById('spEmoji').textContent=m.emoji;
+    var btn=document.getElementById('scrollPopupBtn');
+    btn.style.setProperty('--sp-glow',m.accent+'40');
+    btn.style.setProperty('--sp-ring',m.accent+'50');
+    btn.style.setProperty('--sp-bg',m.accent+'15');
+}
+function showPopup(){
+    if(document.getElementById('modal').classList.contains('active'))return;
+    var el=document.getElementById('scrollPopup');
+    if(popupState==='hidden'){
+        popupState='entering';
+        el.className='scroll-popup entering';
+        setTimeout(function(){
+            if(popupState==='entering'){popupState='idle';el.className='scroll-popup idle'}
+        },550);
+    }
+}
+function hidePopup(){
+    var el=document.getElementById('scrollPopup');
+    if(popupState==='idle'||popupState==='entering'){
+        popupState='exiting';el.className='scroll-popup exiting';
+        setTimeout(function(){if(popupState==='exiting'){popupState='hidden';el.className='scroll-popup'}},300);
+    }
+}
+function scrollPopupClick(){
+    if(currentPopupIdx>=0){
+        hidePopup();
+        setTimeout(function(){openModal(currentPopupIdx)},150);
+    }
+}
+
+/* ===== RENDER GRID ===== */
+function renderGrid(){
+    var d=getData(),g=document.getElementById('monthGrid'),html='';
+    for(var i=0;i<d.length;i++){
+        var m=d[i],cls='',ex='';
+        if(m.special==='haunted'){cls=' haunted-card';ex='<div class="spider-corner tl"><div class="web-line h"></div><div class="web-line v"></div></div><div class="spider-corner br"><div class="web-line h"></div><div class="web-line v"></div></div><div class="ghost-dot" style="top:15%;left:20%"></div><div class="ghost-dot" style="top:60%;left:75%;animation-delay:1.5s"></div><div class="ghost-dot" style="top:30%;right:15%;animation-delay:3s"></div>'}
+        else if(m.special==='advent'){cls=' advent-card';ex='<div class="sparkle-dot" style="top:12%;left:18%;animation:sparkle 2.5s ease-in-out infinite"></div><div class="sparkle-dot" style="top:8%;right:22%;animation:sparkle 3s ease-in-out infinite .8s"></div><div class="sparkle-dot" style="bottom:15%;left:25%;animation:sparkle 2.8s ease-in-out infinite 1.5s"></div><div class="sparkle-dot" style="bottom:10%;right:18%;animation:sparkle 3.2s ease-in-out infinite .4s"></div>'}
+        else if(m.special==='race'){cls=' race-card'}
+        var sc=m.special==='haunted'?'text-green-300/60':'text-charcoal-50';
+        html+='<div class="month-card bg-white rounded-xl p-6 sm:p-8 text-center border border-gold-200/30 shadow-sm anim-in'+cls+'" style="--accent:'+m.accent+';animation-delay:'+(.05*i)+'s" data-idx="'+i+'" onclick="openModal('+i+')">';
+        html+='<img src="'+LOGO+'" alt="" class="card-soho-mark w-24 h-auto object-contain">'+ex;
+        html+='<div class="relative z-10"><div class="month-emoji text-4xl sm:text-5xl mb-3">'+m.emoji+'</div>';
+        html+='<div class="text-[10px] tracking-[.15em] uppercase '+(m.special==='haunted'?'text-green-300/60':'')+' mb-1">'+m.year+'</div>';
+        html+='<h3 class="font-playfair text-lg sm:text-xl font-semibold tracking-tight mb-1">'+m.name+'</h3>';
+        html+='<div class="accent-bar mx-auto mb-3" style="background:linear-gradient(to right,'+m.accent+','+m.accent+'88)"></div>';
+        html+='<p class="card-topic text-xs tracking-[.15em] uppercase font-bold" style="color:'+m.accent+'">'+m.topic+'</p>';
+        html+='<p class="card-sub text-[11px] '+sc+' mt-1 font-light">'+m.subtitle+'</p>';
+        html+='<p class="card-game text-[10px] tracking-[.1em] uppercase font-bold mt-2" style="color:'+m.accent+'">'+m.emoji+' '+m.gameTitle+'</p>';
+        html+='<div class="game-subtitle text-[10px] '+sc+' font-light leading-snug">'+m.theme+'</div>';
+        html+='<div class="flex items-center justify-center gap-1.5 mt-3 '+(m.special==='haunted'?'text-green-300/50':'text-charcoal-50')+'"><span class="iconify" data-icon="'+(m.special==='haunted'?'lucide:moon':'lucide:calendar')+'" data-width="12"></span><span class="text-[11px]">'+m.trainingDays.length+' session'+(m.trainingDays.length!==1?'s':'')+'</span></div>';
+        html+='</div></div>';
+    }
+    g.innerHTML=html;updateStats();setTimeout(initScrollPopup,100);
+}
+function updateStats(){var d=getData(),t=0;for(var i=0;i<d.length;i++)t+=d[i].sessions.length;document.getElementById('statSessions').textContent=t}
+
+/* ===== CALENDAR ===== */
+function genCal(mi,y,td,acc,isH,isEdit){
+    var fd=new Date(y,mi,1).getDay(),dim=new Date(y,mi+1,0).getDate(),dn=['Su','Mo','Tu','We','Th','Fr','Sa'],cCls=isH?'is-haunted':'is-training';
+    var s='<div class="grid grid-cols-7 gap-y-1">';
+    for(var i=0;i<7;i++)s+='<div class="text-[10px] font-bold tracking-wider uppercase py-2" style="color:'+acc+'">'+dn[i]+'</div>';
+    for(var i=0;i<fd;i++)s+='<div class="cal-day is-empty"></div>';
+    for(var d=1;d<=dim;d++){var t=td.indexOf(d)>=0,click=isEdit?' onclick="toggleDay('+d+')" ':'';s+='<div class="cal-day '+(t?cCls:'text-charcoal-200')+'"'+click+'id="calDay_'+d+'">'+d+'</div>'}
+    return s+'</div>';
+}
+function toggleDay(day){
+    var d=getData()[currentModalIdx],idx=d.trainingDays.indexOf(day);
+    if(idx>=0){d.trainingDays.splice(idx,1);toast('Removed training day: '+day,'info')}
+    else{d.trainingDays.push(day);d.trainingDays.sort(function(a,b){return a-b});toast('Added training day: '+day,'success')}
+    saveDays();openModal(currentModalIdx);updateStats();var el=document.getElementById('calDay_'+day);if(el)el.classList.add('day-toggled');
+}
+function genAdvent(td,sessions,isEdit){
+    var h='<div class="grid grid-cols-4 gap-2">';
+    for(var d=1;d<=24;d++){var isT=td.indexOf(d)>=0,ses=null;for(var j=0;j<sessions.length;j++){if(sessions[j].day===d){ses=sessions[j];break}}
+    var lbl=ses?ses.title.replace(/^[^\s]+\s[—–-]\s/,'').substring(0,18):'',click=isEdit?' onclick="toggleDay('+d+')" style="cursor:pointer"':'';
+    h+='<div class="advent-door '+(isT?'golden':'resting')+'"'+click+'><span class="door-num">'+d+'</span>';if(isT)h+='<div class="door-label">'+lbl+'</div>';h+='<img src="'+LOGO+'" alt="" class="soho-seal"></div>'}
+    return h+'</div>';
+}
+
+/* ===== SESSIONS ===== */
+function renderSessions(m,isEdit){
+    var isH=m.special==='haunted';
+    if(!isEdit){
+        var bc=isH?'border-green-900/30':'border-gold-200/50',bc2=isH?'border-green-900/20':'border-gold-100';
+        var h='<div class="border '+bc+' rounded-lg overflow-hidden">';
+        for(var i=0;i<m.sessions.length;i++){var s=m.sessions[i],fin=s.title.indexOf('Assessment')>=0||s.title.indexOf('Challenge')>=0||s.title.indexOf('Victory')>=0||s.title.indexOf('Complete')>=0||s.title.indexOf('Capstone')>=0||s.title.indexOf('Ceremony')>=0;
+        h+='<div class="session-row flex items-start gap-3 px-4 py-3 '+(i<m.sessions.length-1?'border-b '+bc2:'')+'"><div class="flex-shrink-0 w-16"><span class="text-xs font-bold" style="color:'+m.accent+'">'+m.name.slice(0,3)+' '+s.day+'</span></div><div class="flex-1 min-w-0"><p class="text-sm font-medium text-charcoal-300 leading-snug">'+s.title+'</p><p class="text-xs text-charcoal-50 mt-0.5">'+s.time+'</p></div>';
+        if(fin)h+='<span class="flex-shrink-0 text-[10px] tracking-wider uppercase font-bold px-2 py-0.5 rounded-full" style="background:'+m.accent+'10;color:'+m.accent+';border:1px solid '+m.accent+'40">'+(isH?'Challenge':'Final')+'</span>';h+='</div>'}
+        return h+'</div>';
+    }
+    var h='<div class="space-y-2">';
+    for(var i=0;i<m.sessions.length;i++){var s=m.sessions[i];
+    h+='<div class="flex items-center gap-2 p-3 rounded-lg border border-dashed border-gold-200/40 bg-gold-50/30"><input type="number" min="1" max="31" value="'+s.day+'" class="edit-input edit-input-sm" onchange="updateSession('+i+',\'day\',parseInt(this.value))" title="Day"><input type="text" value="'+s.title.replace(/"/g,'&quot;')+'" class="edit-input flex-1" onchange="updateSession('+i+',\'title\',this.value)" placeholder="Title"><input type="text" value="'+s.time.replace(/"/g,'&quot;')+'" class="edit-input edit-input-time" onchange="updateSession('+i+',\'time\',this.value)" placeholder="Time"><button class="session-delete" onclick="removeSession('+i+')"><span class="iconify" data-icon="lucide:trash-2" data-width="13"></span></button></div>'}
+    return h+'</div>';
+}
+function updateSession(si,field,val){var d=getData()[currentModalIdx];if(field==='day'){val=Math.max(1,Math.min(31,val||1));d.sessions[si].day=val}else{d.sessions[si][field]=val}saveSessions()}
+function addSession(){var d=getData()[currentModalIdx],nd=1;for(var i=1;i<=31;i++){if(d.trainingDays.indexOf(i)<0){nd=i;break}}d.sessions.push({day:nd,title:'New Session',time:'10:00 AM – 12:00 PM'});if(d.trainingDays.indexOf(nd)<0){d.trainingDays.push(nd);d.trainingDays.sort(function(a,b){return a-b});saveDays()}saveSessions();openModal(currentModalIdx);updateStats();toast('Session added','success')}
+function removeSession(si){showConfirm('Remove this session?',function(){var d=getData()[currentModalIdx];d.sessions.splice(si,1);saveSessions();openModal(currentModalIdx);updateStats();toast('Session removed','info')})}
+
+/* ===== FILES ===== */
+function triggerFileInput(){pendingFileIdx=currentModalIdx;document.getElementById('fileInput').click()}
+document.getElementById('fileInput').addEventListener('change',function(e){handleFiles(e.target.files);e.target.value=''});
+function handleDragOver(e){e.preventDefault();e.currentTarget.classList.add('dragover')}
+function handleDragLeave(e){e.currentTarget.classList.remove('dragover')}
+function handleDrop(e){e.preventDefault();e.currentTarget.classList.remove('dragover');handleFiles(e.dataTransfer.files)}
+function handleFiles(files){
+    if(!files||!files.length)return;var maxSz=50*1024*1024,idx=0;
+    function next(){if(idx>=files.length)return;var f=files[idx++];if(f.size>maxSz){toast('"'+f.name+'" exceeds 50 MB','error');next();return}
+    var id='f_'+pendingFileIdx+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+    dbPut({id:id,file:f,name:f.name,size:f.size,type:f.type,date:new Date().toLocaleDateString(),monthIdx:pendingFileIdx}).then(function(){toast('Attached: '+f.name,'success');next()}).catch(function(){toast('Failed: '+f.name,'error');next()})}next();
+}
+function renderAttachments(){
+    if(currentModalIdx<0)return;var section=document.getElementById('attachmentsSection'),list=document.getElementById('fileList');
+    if(!editMode){section.classList.add('hidden');return}section.classList.remove('hidden');
+    dbGetByPrefix('f_'+currentModalIdx+'_').then(function(files){
+        files.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
+        if(!files.length){list.innerHTML='<p class="text-xs text-charcoal-50 font-light py-2">No files attached yet</p>';return}
+        var h='';for(var i=0;i<files.length;i++){var f=files[i],ext=f.name.split('.').pop().toLowerCase(),ic='other',ii='lucide:file';
+        if(ext==='doc'||ext==='docx'){ic='doc';ii='lucide:file-text'}else if(ext==='xls'||ext==='xlsx'||ext==='csv'){ic='sheet';ii='lucide:table-2'}else if(ext==='pdf'){ic='pdf';ii='lucide:file-text'}else if(['jpg','jpeg','png','gif','webp'].indexOf(ext)>=0){ic='img';ii='lucide:image'}
+        var sz=f.size<1024?f.size+' B':f.size<1048576?(f.size/1024).toFixed(1)+' KB':(f.size/1048576).toFixed(1)+' MB',sn=f.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        h+='<div class="file-chip"><div class="file-chip-icon '+ic+'"><span class="iconify" data-icon="'+ii+'" data-width="18"></span></div><div class="min-w-0 flex-1"><p class="text-sm font-medium text-charcoal-300 truncate">'+f.name+'</p><p class="file-size">'+sz+(f.date?' · '+f.date:'')+'</p></div><div class="file-chip-actions"><button class="file-chip-btn" onclick="downloadFile(\''+f.id+'\')"><span class="iconify" data-icon="lucide:download" data-width="14"></span></button><button class="file-chip-btn danger" onclick="removeFile(\''+f.id+'\',\''+sn+'\')"><span class="iconify" data-icon="lucide:trash-2" data-width="14"></span></button></div></div>'}
+        list.innerHTML=h;
+    }).catch(function(){list.innerHTML='<p class="text-xs text-charcoal-50 font-light py-2">Could not load files</p>'});
+}
+function downloadFile(id){dbGet(id).then(function(rec){if(!rec||!rec.file)return;var url=URL.createObjectURL(rec.file),a=document.createElement('a');a.href=url;a.download=rec.name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);toast('Downloading: '+rec.name,'info')})}
+function removeFile(id,name){showConfirm('Remove "'+name+'"?',function(){dbDelete(id).then(function(){renderAttachments();toast('Removed: '+name,'info')})})}
+
+/* ===== MODAL ===== */
+function openModal(idx){
+    currentModalIdx=idx;var m=getData()[idx],md=document.getElementById('modal'),isH=m.special==='haunted';
+    var hdr=document.getElementById('modalHeader');
+    hdr.className=isH?'relative px-6 sm:px-10 pt-10 pb-6 border-b haunted-header':'relative px-6 sm:px-10 pt-10 pb-6 border-b border-gold-200/40';
+    var tc=isH?'text-green-100/90':'',sc=isH?'text-green-200/60':'text-charcoal-50';
+    var ml=isH?'👻 Haunted Metaphor':m.special==='advent'?'🎄 Advent Metaphor':'Game Metaphor';
+    document.getElementById('modalTitleArea').innerHTML='<div class="relative z-10 flex items-center gap-4 mb-3"><span class="text-5xl float-anim">'+m.emoji+'</span><div><h2 class="font-playfair text-2xl sm:text-3xl font-semibold tracking-tight '+tc+'">'+m.fullName+'</h2><div class="flex flex-wrap items-center gap-2 mt-1"><span class="text-xs tracking-[.15em] uppercase font-bold px-3 py-1 rounded-full border" style="color:'+m.accent+';border-color:'+m.accent+'40;background:'+m.accent+'10">'+m.topic+'</span><span class="text-xs '+sc+' font-light">'+m.subtitle+'</span></div></div></div><p class="font-playfair text-base sm:text-lg italic '+(isH?'text-green-300/50':'text-charcoal-200')+' relative z-10">"'+m.theme+'"</p>';
+    document.getElementById('modalGameCard').innerHTML='<div class="flex items-start gap-3 mb-3"><span class="text-2xl mt-0.5">'+m.emoji+'</span><div><span class="text-[10px] tracking-[.2em] uppercase font-bold" style="color:'+m.accent+'">'+ml+'</span><h4 class="font-playfair text-base font-semibold text-charcoal-300 mt-0.5">'+m.gameTitle+'</h4></div></div><p class="text-sm text-charcoal-100 font-light leading-relaxed pl-11">'+m.gameMetaphor+'</p><div class="mt-3 ml-11"><div class="game-badge text-white" style="background:linear-gradient(135deg,'+m.accent+','+m.accent+'cc)"><span class="iconify" data-icon="'+m.gameIcon+'" data-width="14"></span>'+m.gameTitle+'</div></div>';
+    document.getElementById('modalGameCard').style.cssText='border-color:'+m.accent+'30;background:'+m.accent+'06';
+    document.getElementById('modalDescription').textContent=m.description;
+    var kp='';for(var i=0;i<m.keyPoints.length;i++)kp+='<div class="flex items-start gap-2.5"><div class="key-dot" style="background:'+m.accent+'"></div><span class="text-sm text-charcoal-100 font-light leading-relaxed">'+m.keyPoints[i]+'</span></div>';
+    document.getElementById('modalKeyPoints').innerHTML=kp;
+    document.getElementById('modalSessions').innerHTML=renderSessions(m,editMode);
+    document.getElementById('addSessionBtn').classList.toggle('hidden',!editMode);
+    document.getElementById('calEditHint').classList.toggle('hidden',!editMode);
+    document.getElementById('modalCalTitle').textContent=m.fullName;
+    if(m.special==='advent'){document.getElementById('modalCalendar').innerHTML=genAdvent(m.trainingDays,m.sessions,editMode);document.getElementById('modalCalLegend').innerHTML='<div class="flex items-center gap-4 justify-center flex-wrap"><div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded bg-gradient-to-br from-gold-400 to-gold-300"></div><span class="text-xs text-charcoal-50">Open Door</span></div><div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded border border-gold-200 opacity-40"></div><span class="text-xs text-charcoal-50">Rest Day</span></div></div>'}
+    else{document.getElementById('modalCalendar').innerHTML=genCal(m.month,m.year,m.trainingDays,m.accent,isH,editMode);var dc=isH?'from-green-400 to-green-500':'from-gold-400 to-gold-300';document.getElementById('modalCalLegend').innerHTML='<div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-full bg-gradient-to-br '+dc+'"></div><span class="text-xs text-charcoal-50">'+(isH?'Haunted Session':'Training Day')+'</span></div>'}
+    renderAttachments();md.classList.add('active');document.body.style.overflow='hidden';hidePopup();
+}
+function closeModal(){document.getElementById('modal').classList.remove('active');document.body.style.overflow='';currentModalIdx=-1}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('confirmOverlay').classList.contains('active')){document.getElementById('confirmOverlay').classList.remove('active');confirmCb=null}else{closeModal()}}});
+
+fetch(DATA_URL,{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+    .then(function(d){defaultData=d;renderGrid()})
+    .catch(function(e){console.error(e);document.getElementById('monthGrid').innerHTML='<p class="col-span-full text-center text-charcoal-100 py-8">Failed to load calendar data ('+e.message+'). If this is a local preview, deploy to Netlify so the /api/data function is available.</p>'});
+</script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+[
+  {
+    "month": 4,
+    "year": 2026,
+    "name": "May",
+    "fullName": "May 2026",
+    "emoji": "🐍",
+    "accent": "#C9A96E",
+    "special": null,
+    "topic": "CRM",
+    "subtitle": "Customer Relationship Management",
+    "theme": "Climbing the Loyalty Ladder",
+    "gameTitle": "SNAKE & LADDERS",
+    "gameIcon": "lucide:layers",
+    "gameMetaphor": "In Snake & Ladders, every ladder rockets you forward and every snake drags you down. CRM is the same game — a personalized follow-up is a ladder that climbs toward loyalty, while a missed interaction or poor experience is a snake that drops the client back to square one. Master the board, know where the snakes hide, and always aim for the ladders.",
+    "description": "Understanding the complete customer journey from first interaction to long-term loyalty. Learn to leverage CRM tools effectively, track client preferences, and create personalized experiences that turn visitors into brand advocates within Soho Group.",
+    "keyPoints": [
+      "CRM platform navigation and data entry best practices",
+      "Client profiling and segmentation strategies for luxury retail",
+      "Building and maintaining effective loyalty programs",
+      "Personalized follow-up communication techniques",
+      "Measuring customer lifetime value and retention metrics"
+    ],
+    "trainingDays": [
+      5,
+      12,
+      19,
+      26
+    ],
+    "sessions": [
+      {
+        "day": 5,
+        "title": "The Board — CRM Fundamentals",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 12,
+        "title": "Finding the Ladders — Client Profiling",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 19,
+        "title": "Avoiding the Snakes — Loyalty Building",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 26,
+        "title": "Reaching Square 100 — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 5,
+    "year": 2026,
+    "name": "June",
+    "fullName": "June 2026",
+    "emoji": "🏁",
+    "accent": "#648cb4",
+    "special": "race",
+    "topic": "Time Management",
+    "subtitle": "Master Your Minutes",
+    "theme": "Beat the Clock — Every Second Counts",
+    "gameTitle": "RACE TRACK",
+    "gameIcon": "lucide:timer",
+    "gameMetaphor": "Time management is a race track — you have laps to complete (daily tasks), pit stops for refueling (breaks), and a finish line to cross each day. The wrong strategy and you spin out or run out of fuel. The right one — proper pacing, smart pit stops, and knowing when to accelerate — and you set a personal best every single day.",
+    "description": "Develop strategies to prioritize tasks, eliminate time-wasters, and create systems that allow you to focus on high-impact activities. Learn the art of pacing your day like a champion racer.",
+    "keyPoints": [
+      "Conducting a personal time audit and identifying time leaks",
+      "The Eisenhower Matrix for priority decision-making",
+      "Techniques for managing distractions and deep focus",
+      "Effective delegation without micromanaging",
+      "Creating daily and weekly planning systems"
+    ],
+    "trainingDays": [
+      2,
+      9,
+      16,
+      23
+    ],
+    "sessions": [
+      {
+        "day": 2,
+        "title": "The Track Layout — Time Audit",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 9,
+        "title": "Pit Stop Strategy — Focus & Breaks",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 16,
+        "title": "Pacing & Overtaking — Delegation",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 23,
+        "title": "The Finish Line — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 6,
+    "year": 2026,
+    "name": "July",
+    "fullName": "July 2026",
+    "emoji": "🎲",
+    "accent": "#8FAE8B",
+    "special": null,
+    "topic": "Organization Skill",
+    "subtitle": "Structure for Success",
+    "theme": "Know the Rules, Play the Game",
+    "gameTitle": "BOARD GAME",
+    "gameIcon": "lucide:layout-grid",
+    "gameMetaphor": "Every board game has a clear board, defined rules, organized pieces, and a turn order. Organization skill is exactly the same — your workspace is the board, your processes are the rules, your documents are the pieces, and your workflow is the turn order. When everything is in its place and everyone knows the rules, the game flows perfectly.",
+    "description": "Build frameworks for organizing workflows, digital assets, physical spaces, and team processes. A well-organized professional delivers consistent excellence through structured systems.",
+    "keyPoints": [
+      "Digital workspace organization and file management",
+      "Workflow optimization and process mapping",
+      "Team process documentation and standardization",
+      "Physical space organization for retail environments",
+      "Creating repeatable systems for consistency"
+    ],
+    "trainingDays": [
+      7,
+      14,
+      21,
+      28
+    ],
+    "sessions": [
+      {
+        "day": 7,
+        "title": "The Board — Digital Workspace Setup",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 14,
+        "title": "The Rules — Process Mapping",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 21,
+        "title": "The Pieces — Documentation Standards",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 28,
+        "title": "Game Master — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 7,
+    "year": 2026,
+    "name": "August",
+    "fullName": "August 2026",
+    "emoji": "🗺️",
+    "accent": "#D4A853",
+    "special": null,
+    "topic": "KPIs & Business Focus",
+    "subtitle": "Measuring What Matters",
+    "theme": "Follow the Clues to Unlock Business Growth",
+    "gameTitle": "TREASURE HUNT",
+    "gameIcon": "lucide:map",
+    "gameMetaphor": "KPIs are like a treasure hunt — each metric is a clue that leads you closer to the prize of business growth. You need the right map (your dashboard), the right clues (data points like conversion rate, ATV, UPT), and the right instincts to interpret them. Some clues are red herrings — vanity metrics that don't move the needle. Follow the real clues and unlock the treasure.",
+    "description": "Understand the key performance indicators that drive retail success. Learn to read, interpret, and act on business data to make informed decisions that impact the bottom line.",
+    "keyPoints": [
+      "Understanding core retail KPIs (conversion, ATV, UPT, footfall)",
+      "Reading and interpreting sales reports and dashboards",
+      "Setting realistic targets and tracking progress",
+      "Identifying vanity metrics vs. actionable data",
+      "Presenting business performance to stakeholders"
+    ],
+    "trainingDays": [
+      4,
+      11,
+      18,
+      25
+    ],
+    "sessions": [
+      {
+        "day": 4,
+        "title": "The Map — Understanding Retail KPIs",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 11,
+        "title": "The Clues — Reading & Interpreting Data",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 18,
+        "title": "False Trails — Avoiding Vanity Metrics",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 25,
+        "title": "The Treasure — Assessment & Case Study",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 8,
+    "year": 2026,
+    "name": "September",
+    "fullName": "September 2026",
+    "emoji": "🏋️",
+    "accent": "#6BAF8D",
+    "special": null,
+    "topic": "Team Performance",
+    "subtitle": "Elevating Together",
+    "theme": "Train Hard, Win Together",
+    "gameTitle": "SKILL FITNESS CAMP",
+    "gameIcon": "lucide:dumbbell",
+    "gameMetaphor": "Like a sports training camp where athletes push their limits together, build trust through shared drills, and sharpen every muscle — team performance training is a fitness camp for your professional skills. Every drill builds a stronger team, every coaching session refines technique, and every challenge test builds the endurance needed to perform under pressure.",
+    "description": "Explore techniques for motivating teams, setting clear expectations, providing constructive feedback, and creating an environment where everyone performs at their best.",
+    "keyPoints": [
+      "Understanding team dynamics and personality types",
+      "Setting clear expectations and accountability frameworks",
+      "The art of constructive feedback and coaching",
+      "Motivation techniques beyond monetary incentives",
+      "Conflict resolution and difficult conversations"
+    ],
+    "trainingDays": [
+      1,
+      8,
+      15,
+      22
+    ],
+    "sessions": [
+      {
+        "day": 1,
+        "title": "Warm-Up — Team Dynamics Assessment",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 8,
+        "title": "Strength Training — Accountability",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 15,
+        "title": "Coaching Drills — Feedback Techniques",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 22,
+        "title": "The Final Test — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 9,
+    "year": 2026,
+    "name": "October",
+    "fullName": "October 2026",
+    "emoji": "👻",
+    "accent": "#6ac896",
+    "special": "haunted",
+    "topic": "Store Operations",
+    "subtitle": "Operational Excellence",
+    "theme": "Haunted Learning — Navigate the Dark Corridors of Operations",
+    "gameTitle": "HAUNTED LEARNING",
+    "gameIcon": "lucide:ghost",
+    "gameMetaphor": "Store operations is like exploring a haunted house — every room hides a different challenge. The stockroom could be a maze of shadows, the sales floor could have puzzles hidden in plain sight, and compliance lurks in the darkest corners waiting to catch you off guard. Only those who face each room with courage, follow the rules, and master the unknown make it out with operational excellence.",
+    "description": "Master the daily operations that keep a luxury retail store running seamlessly — from inventory management and visual merchandising to loss prevention and compliance.",
+    "keyPoints": [
+      "Daily operations: opening rituals and closing ceremonies",
+      "Inventory management: surviving the stockroom maze",
+      "Visual merchandising: bringing the displays to life",
+      "Loss prevention: watching the shadows",
+      "Health, safety & compliance: the rules of the haunted house"
+    ],
+    "trainingDays": [
+      6,
+      13,
+      20,
+      27
+    ],
+    "sessions": [
+      {
+        "day": 6,
+        "title": "Entering the House — Opening & Closing Rituals",
+        "time": "6:00 PM – 8:00 PM 👻"
+      },
+      {
+        "day": 13,
+        "title": "The Stockroom Maze — Inventory",
+        "time": "6:00 PM – 8:00 PM 🦇"
+      },
+      {
+        "day": 20,
+        "title": "Bringing Displays to Life — VM",
+        "time": "6:00 PM – 8:00 PM 🕸️"
+      },
+      {
+        "day": 27,
+        "title": "Escaping the House — Final Audit",
+        "time": "6:00 PM – 9:00 PM 💀"
+      }
+    ]
+  },
+  {
+    "month": 10,
+    "year": 2026,
+    "name": "November",
+    "fullName": "November 2026",
+    "emoji": "🚪",
+    "accent": "#C4856A",
+    "special": null,
+    "topic": "Styling & Personalization",
+    "subtitle": "The Art of Styling",
+    "theme": "Solve the Puzzle, Unlock the Look",
+    "gameTitle": "ESCAPE ROOM",
+    "gameIcon": "lucide:lock",
+    "gameMetaphor": "An escape room is a series of interconnected puzzles you must solve under pressure to unlock the door. Styling a client is the same challenge — read the clues (body language, personal style cues), crack the code (understand their preferences), piece together the solution (curate the perfect outfit), and unlock the door to the perfect look.",
+    "description": "Develop your eye for styling, learn to read client cues, and master the art of personalized recommendations. Each client is a new room — solve the puzzle and unlock their perfect look.",
+    "keyPoints": [
+      "Reading client clues: body language and style signals",
+      "Cracking the code: understanding preferences quickly",
+      "Curating complete looks and cross-category styling",
+      "Personalization techniques for VIP clients",
+      "Working under pressure: styling consultations"
+    ],
+    "trainingDays": [
+      3,
+      10,
+      17,
+      24
+    ],
+    "sessions": [
+      {
+        "day": 3,
+        "title": "Reading the Room — Client Style Clues",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 10,
+        "title": "Cracking the Code — Preference Mapping",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 17,
+        "title": "Solving the Puzzle — Look Creation",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 24,
+        "title": "Unlocking the Door — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 11,
+    "year": 2026,
+    "name": "December",
+    "fullName": "December 2026",
+    "emoji": "🎄",
+    "accent": "#c87850",
+    "special": "advent",
+    "topic": "Communication Excellence",
+    "subtitle": "Speak with Impact",
+    "theme": "The Advent Calendar — Unwrap a New Skill Each Week",
+    "gameTitle": "ADVENT CALENDAR",
+    "gameIcon": "lucide:gift",
+    "gameMetaphor": "Like an advent calendar hides a surprise behind every door, this month reveals a new communication skill each week. Open Door 1 and discover the power of precise words. Open Door 2 and unlock the secrets of body language. Open Door 3 and master the art of storytelling. By the final door, you'll have unwrapped the complete gift of communication excellence.",
+    "description": "Refine your verbal and non-verbal communication skills. Each session is a new \"door\" to open — revealing techniques that transform how you connect, persuade, and present in luxury retail.",
+    "keyPoints": [
+      "Door 1: Verbal mastery — choosing words that open doors",
+      "Door 2: Non-verbal magic — body language and presence",
+      "Door 3: Active listening — hearing what isn't said",
+      "Handling objections with grace and confidence",
+      "Storytelling that captivates and convinces"
+    ],
+    "trainingDays": [
+      1,
+      8,
+      15
+    ],
+    "sessions": [
+      {
+        "day": 1,
+        "title": "🚪 Door 1 — The Power of Words",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 8,
+        "title": "🚪 Door 2 — Body Language Secrets",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 15,
+        "title": "🚪 Door 3 — Storytelling Mastery",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 0,
+    "year": 2027,
+    "name": "January",
+    "fullName": "January 2027",
+    "emoji": "🎯",
+    "accent": "#6BA5A5",
+    "special": null,
+    "topic": "Growth Mindset vs Closed Mindset",
+    "subtitle": "Unlock Your Potential",
+    "theme": "What Seems Impossible Becomes Possible",
+    "gameTitle": "MISSION POSSIBLE",
+    "gameIcon": "lucide:shield-check",
+    "gameMetaphor": "In Mission Possible, what seems impossible becomes achievable with the right mindset, tools, and determination. A fixed mindset says \"the mission is impossible\" and walks away. A growth mindset studies the obstacles, equips the right tools (self-awareness, resilience, reframing), and steps into the mission knowing that failure is just intelligence gathering for the next attempt.",
+    "description": "Discover how your mindset shapes your reality. Learn to identify fixed mindset triggers, reframe challenges as opportunities, and cultivate a growth-oriented approach to everything you do.",
+    "keyPoints": [
+      "The science behind growth vs fixed mindsets",
+      "Identifying personal fixed mindset triggers",
+      "Reframing techniques: turning obstacles into opportunities",
+      "Building resilience and embracing failure as feedback",
+      "Creating a personal growth manifesto and daily practices"
+    ],
+    "trainingDays": [
+      5,
+      12,
+      19,
+      26
+    ],
+    "sessions": [
+      {
+        "day": 5,
+        "title": "The Briefing — Mindset Science",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 12,
+        "title": "The Obstacles — Identifying Triggers",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 19,
+        "title": "The Gadgets — Reframing Tools",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 26,
+        "title": "Mission Complete — Assessment",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 1,
+    "year": 2027,
+    "name": "February",
+    "fullName": "February 2027",
+    "emoji": "⚔️",
+    "accent": "#A06060",
+    "special": null,
+    "topic": "Practical Integration",
+    "subtitle": "Bringing It All Together",
+    "theme": "All Skills Collide — Only the Best Survive",
+    "gameTitle": "MULTIPLAYER ARENA",
+    "gameIcon": "lucide:swords",
+    "gameMetaphor": "After months of solo training, it's time to enter the Multiplayer Arena — where every skill you've collected gets tested in real-time battles. CRM meets communication. Styling meets time management. KPIs meet team performance. There are no practice rounds here. Every scenario is live, every challenge is real.",
+    "description": "An intensive month of putting all previous learnings into action through real-world scenarios, role-plays, and live case studies from Soho Group's retail environment.",
+    "keyPoints": [
+      "Integrating CRM skills with communication excellence",
+      "Applying KPIs knowledge to store operations",
+      "Combining styling expertise with time management",
+      "Real-world scenario simulations and role-plays",
+      "Peer-to-peer teaching and knowledge sharing"
+    ],
+    "trainingDays": [
+      2,
+      9,
+      16,
+      23
+    ],
+    "sessions": [
+      {
+        "day": 2,
+        "title": "Entering the Arena — CRM + Communication",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 9,
+        "title": "Combat Round — Operations + KPIs",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 16,
+        "title": "Boss Battle — Full Scenario Simulations",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 23,
+        "title": "Victory Screen — Peer Review",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 2,
+    "year": 2027,
+    "name": "March",
+    "fullName": "March 2027",
+    "emoji": "👑",
+    "accent": "#D4A853",
+    "special": null,
+    "topic": "Advanced Workshop",
+    "subtitle": "Pushing Boundaries",
+    "theme": "Face the Final Boss — Prove You're Ready",
+    "gameTitle": "FINAL BOSS",
+    "gameIcon": "lucide:crown",
+    "gameMetaphor": "Every great game builds toward one epic confrontation: the Final Boss. This advanced workshop is that moment — the ultimate test of everything you've learned. Advanced selling techniques, VIP client management, leadership skills — each one is a phase of the boss fight. You'll need every skill, every strategy, every ounce of determination to defeat it.",
+    "description": "Deep-dive workshops into advanced selling techniques, luxury client management, and leadership skills that prepare you for the next level in your career with Soho Group.",
+    "keyPoints": [
+      "Advanced selling techniques for high-value transactions",
+      "Clienteling at the highest level: VIP management",
+      "Leadership essentials and management readiness",
+      "Strategic thinking and business acumen",
+      "Personal branding and professional presence"
+    ],
+    "trainingDays": [
+      2,
+      9,
+      16,
+      23
+    ],
+    "sessions": [
+      {
+        "day": 2,
+        "title": "Phase 1 — Advanced Selling for Luxury",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 9,
+        "title": "Phase 2 — Clienteling Mastery",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 16,
+        "title": "Phase 3 — Leadership Essentials",
+        "time": "10:00 AM – 1:00 PM"
+      },
+      {
+        "day": 23,
+        "title": "Victory — Capstone Project",
+        "time": "10:00 AM – 1:00 PM"
+      }
+    ]
+  },
+  {
+    "month": 3,
+    "year": 2027,
+    "name": "April",
+    "fullName": "April 2027",
+    "emoji": "⭐",
+    "accent": "#6B7FA0",
+    "special": null,
+    "topic": "Annual Review & Planning",
+    "subtitle": "Reflect & Rise",
+    "theme": "The Achievement Screen — See Your Full Score",
+    "gameTitle": "ACHIEVEMENT UNLOCKED",
+    "gameIcon": "lucide:trophy",
+    "gameMetaphor": "Every great game ends with an achievement screen — a recap of every level cleared, every boss defeated, every skill unlocked, and your final score. This is that moment. Look back at the entire journey from May 2026 to now. See every training session as an unlocked achievement, every challenge as a defeated boss, and every skill as a new power you now permanently possess.",
+    "description": "Celebrate achievements, review personal development progress, and set clear, actionable goals for the coming year. A month of reflection, recognition, and renewed commitment to excellence.",
+    "keyPoints": [
+      "Comprehensive year-in-review and self-assessment",
+      "Celebrating wins and acknowledging growth areas",
+      "Goal setting using SMART framework",
+      "Creating a personal development plan for the next chapter",
+      "Recognition ceremony and team celebration"
+    ],
+    "trainingDays": [
+      6,
+      13,
+      20
+    ],
+    "sessions": [
+      {
+        "day": 6,
+        "title": "The Score Screen — Year in Review",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 13,
+        "title": "Next Quest — Goal Setting",
+        "time": "10:00 AM – 12:00 PM"
+      },
+      {
+        "day": 20,
+        "title": "Victory Celebration — Ceremony",
+        "time": "11:00 AM – 2:00 PM"
+      }
+    ]
+  }
+]
