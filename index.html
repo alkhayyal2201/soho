@@ -337,7 +337,7 @@
                             </div>
                             <div id="modalSessions"></div>
                         </div>
-                        <div id="attachmentsSection" class="hidden">
+                        <div id="attachmentsSection" class="">
                             <h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold mb-4">
                                 <span class="iconify inline-block align-middle mr-1" data-icon="lucide:paperclip" data-width="14"></span>
                                 Attached Materials
@@ -578,18 +578,79 @@ function handleFiles(files){
     var id='f_'+pendingFileIdx+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
     dbPut({id:id,file:f,name:f.name,size:f.size,type:f.type,date:new Date().toLocaleDateString(),monthIdx:pendingFileIdx}).then(function(){toast('Attached: '+f.name,'success');next()}).catch(function(){toast('Failed: '+f.name,'error');next()})}next();
 }
-function renderAttachments(){
-    if(currentModalIdx<0)return;var section=document.getElementById('attachmentsSection'),list=document.getElementById('fileList');
-    if(!editMode){section.classList.add('hidden');return}section.classList.remove('hidden');
-    dbGetByPrefix('f_'+currentModalIdx+'_').then(function(files){
-        files.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
-        if(!files.length){list.innerHTML='<p class="text-xs text-charcoal-50 font-light py-2">No files attached yet</p>';return}
-        var h='';for(var i=0;i<files.length;i++){var f=files[i],ext=f.name.split('.').pop().toLowerCase(),ic='other',ii='lucide:file';
-        if(ext==='doc'||ext==='docx'){ic='doc';ii='lucide:file-text'}else if(ext==='xls'||ext==='xlsx'||ext==='csv'){ic='sheet';ii='lucide:table-2'}else if(ext==='pdf'){ic='pdf';ii='lucide:file-text'}else if(['jpg','jpeg','png','gif','webp'].indexOf(ext)>=0){ic='img';ii='lucide:image'}
-        var sz=f.size<1024?f.size+' B':f.size<1048576?(f.size/1024).toFixed(1)+' KB':(f.size/1048576).toFixed(1)+' MB',sn=f.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-        h+='<div class="file-chip"><div class="file-chip-icon '+ic+'"><span class="iconify" data-icon="'+ii+'" data-width="18"></span></div><div class="min-w-0 flex-1"><p class="text-sm font-medium text-charcoal-300 truncate">'+f.name+'</p><p class="file-size">'+sz+(f.date?' · '+f.date:'')+'</p></div><div class="file-chip-actions"><button class="file-chip-btn" onclick="downloadFile(\''+f.id+'\')"><span class="iconify" data-icon="lucide:download" data-width="14"></span></button><button class="file-chip-btn danger" onclick="removeFile(\''+f.id+'\',\''+sn+'\')"><span class="iconify" data-icon="lucide:trash-2" data-width="14"></span></button></div></div>'}
-        list.innerHTML=h;
-    }).catch(function(){list.innerHTML='<p class="text-xs text-charcoal-50 font-light py-2">Could not load files</p>'});
+function renderAttachments() {
+    if (currentModalIdx < 0) return;
+    
+    var section = document.getElementById('attachmentsSection'),
+        list = document.getElementById('fileList'),
+        fileZone = document.getElementById('fileZone');
+
+    // Retrieve files associated with the current month from IndexedDB [cite: 6]
+    dbGetByPrefix('f_' + currentModalIdx + '_').then(function(files) {
+        
+        // 1. Show section if files exist or if user is in Edit Mode [cite: 7]
+        if (files.length > 0 || editMode) {
+            section.classList.remove('hidden');
+        } else {
+            section.classList.add('hidden');
+        }
+
+        // 2. Hide the drag-and-drop upload area if not in Edit Mode
+        if (fileZone) {
+            fileZone.classList.toggle('hidden', !editMode);
+        }
+
+        // Handle empty state within Edit Mode
+        if (!files.length) {
+            list.innerHTML = editMode ? '<p class="text-xs text-charcoal-50 font-light py-2">No files attached yet</p>' : '';
+            return;
+        }
+
+        // 3. Sort and Render the file chips
+        files.sort(function(a, b) {
+            return (b.date || '').localeCompare(a.date || '');
+        });
+
+        var h = '';
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i],
+                ext = f.name.split('.').pop().toLowerCase(),
+                ic = 'other', 
+                ii = 'lucide:file';
+
+            // Determine Icon and Style based on file extension
+            if (ext === 'doc' || ext === 'docx') { ic = 'doc'; ii = 'lucide:file-text' }
+            else if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') { ic = 'sheet'; ii = 'lucide:table-2' }
+            else if (ext === 'pdf') { ic = 'pdf'; ii = 'lucide:file-text' }
+            else if (['jpg', 'jpeg', 'png', 'gif', 'webp'].indexOf(ext) >= 0) { ic = 'img'; ii = 'lucide:image' }
+
+            var sz = f.size < 1024 ? f.size + ' B' : f.size < 1048576 ? (f.size / 1024).toFixed(1) + ' KB' : (f.size / 1048576).toFixed(1) + ' MB';
+            var sn = f.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+
+            // Build the HTML for the file chip
+            h += '<div class="file-chip">';
+            h += '<div class="file-chip-icon ' + ic + '"><span class="iconify" data-icon="' + ii + '" data-width="18"></span></div>';
+            h += '<div class="min-w-0 flex-1"><p class="text-sm font-medium text-charcoal-300 truncate">' + f.name + '</p><p class="file-size">' + sz + (f.date ? ' · ' + f.date : '') + '</p></div>';
+            h += '<div class="file-chip-actions">';
+            
+            // Download button (Always visible)
+            h += '<button class="file-chip-btn" onclick="downloadFile(\'' + f.id + '\')"><span class="iconify" data-icon="lucide:download" data-width="14"></span></button>';
+            
+            // Delete button (Only visible in Edit Mode) [cite: 7]
+            if (editMode) {
+                h += '<button class="file-chip-btn danger" onclick="removeFile(\'' + f.id + '\',\'' + sn + '\')"><span class="iconify" data-icon="lucide:trash-2" data-width="14"></span></button>';
+            }
+            
+            h += '</div></div>';
+        }
+        list.innerHTML = h;
+
+    }).catch(function(err) {
+        // Keep the catch block for resilience against database errors [cite: 6]
+        console.error("File retrieval error:", err);
+        list.innerHTML = '<p class="text-xs text-red-400 font-light py-2">Error loading attachments.</p>';
+        section.classList.remove('hidden');
+    });
 }
 function downloadFile(id){dbGet(id).then(function(rec){if(!rec||!rec.file)return;var url=URL.createObjectURL(rec.file),a=document.createElement('a');a.href=url;a.download=rec.name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);toast('Downloading: '+rec.name,'info')})}
 function removeFile(id,name){showConfirm('Remove "'+name+'"?',function(){dbDelete(id).then(function(){renderAttachments();toast('Removed: '+name,'info')})})}
