@@ -252,6 +252,10 @@
                     <span class="iconify" data-icon="lucide:pencil" data-width="13"></span>
                     <span class="hidden sm:inline">Edit</span>
                 </button>
+                <button id="addMonthBtn" class="edit-btn hidden" onclick="addMonth()">
+                    <span class="iconify" data-icon="lucide:plus" data-width="13"></span>
+                    <span class="hidden sm:inline">Add Month</span>
+                </button>
                 <span id="saveStatus" class="text-[10px] tracking-[.25em] uppercase font-light text-charcoal-50 hidden" style="letter-spacing:.2em"></span>
                 <span class="hidden md:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Training Calendar</span>
                 <div class="year-badge"><span class="dot"></span>2026</div>
@@ -440,6 +444,7 @@ function toggleEditMode(){
     var btn=document.getElementById('editToggle');
     btn.classList.toggle('active',editMode);
     btn.innerHTML=editMode?'<span class="iconify" data-icon="lucide:check" data-width="13"></span><span class="hidden sm:inline">Editing</span>':'<span class="iconify" data-icon="lucide:pencil" data-width="13"></span><span class="hidden sm:inline">Edit</span>';
+    document.getElementById('addMonthBtn').classList.toggle('hidden',!editMode);
     document.getElementById('gridSubtitle').textContent=editMode?'Click any month to edit training days, sessions, and attach files — changes save automatically':'Each month is linked to a classic game — hover to discover the metaphor';
     if(currentModalIdx>=0)openModal(currentModalIdx);
     toast(editMode?'Edit mode enabled — changes save automatically':'Edit mode disabled','info');
@@ -566,6 +571,14 @@ function updateSession(si,field,val){var d=getData()[currentModalIdx];if(field==
 function addSession(){var d=getData()[currentModalIdx],nd=1;for(var i=1;i<=31;i++){if(d.trainingDays.indexOf(i)<0){nd=i;break}}d.sessions.push({day:nd,title:'New Session',time:'10:00 AM – 12:00 PM'});if(d.trainingDays.indexOf(nd)<0){d.trainingDays.push(nd);d.trainingDays.sort(function(a,b){return a-b});saveDays()}saveSessions();openModal(currentModalIdx);updateStats();toast('Session added','success')}
 function removeSession(si){showConfirm('Remove this session?',function(){var d=getData()[currentModalIdx];d.sessions.splice(si,1);saveSessions();openModal(currentModalIdx);updateStats();toast('Session removed','info')})}
 function updateMeta(idx,field,val){getData()[idx][field]=val;renderGrid();scheduleSave();toast('Updated '+field,'success')}
+function updateKeyPoint(idx,ki,val){getData()[idx].keyPoints[ki]=val;scheduleSave()}
+function addKeyPoint(idx){getData()[idx].keyPoints.push('New key point');scheduleSave();openModal(idx);toast('Key point added','success')}
+function removeKeyPoint(idx,ki){showConfirm('Remove this key point?',function(){getData()[idx].keyPoints.splice(ki,1);scheduleSave();openModal(idx);toast('Key point removed','info')})}
+function deleteMonth(idx){showConfirm('Delete this entire month and all its data? This cannot be undone.',function(){getData().splice(idx,1);scheduleSave();closeModal();renderGrid();toast('Month deleted','info')})}
+function addMonth(){
+    var d=getData(),m={month:d.length%12,year:2026,name:'New Month',fullName:'New Month 2026',emoji:'📅',accent:'#C9A96E',special:null,topic:'New Topic',subtitle:'New Subtitle',theme:'New Theme',gameTitle:'NEW GAME',gameIcon:'lucide:star',gameMetaphor:'New metaphor...',description:'New description...',keyPoints:['Key point 1','Key point 2','Key point 3'],trainingDays:[],sessions:[]};
+    d.push(m);scheduleSave();renderGrid();var ni=d.length-1;setTimeout(function(){openModal(ni)},100);toast('New month added — edit the fields below','success');
+}
 
 /* ===== FILES ===== */
 function triggerFileInput(){pendingFileIdx=currentModalIdx;document.getElementById('fileInput').click()}
@@ -666,14 +679,49 @@ function openModal(idx){
     if(!editMode){
         document.getElementById('modalTitleArea').innerHTML='<div class="relative z-10 flex items-center gap-4 mb-3"><span class="text-5xl float-anim">'+m.emoji+'</span><div><h2 class="font-playfair text-2xl sm:text-3xl font-semibold tracking-tight '+tc+'">'+m.fullName+'</h2><div class="flex flex-wrap items-center gap-2 mt-1"><span class="text-xs tracking-[.15em] uppercase font-bold px-3 py-1 rounded-full border" style="color:'+m.accent+';border-color:'+m.accent+'40;background:'+m.accent+'10">'+m.topic+'</span><span class="text-xs '+sc+' font-light">'+m.subtitle+'</span></div></div></div><p class="font-playfair text-base sm:text-lg italic '+(isH?'text-green-300/50':'text-charcoal-200')+' relative z-10">"'+m.theme+'"</p>';
         document.getElementById('modalDescription').textContent=m.description;
+        document.getElementById('modalGameCard').innerHTML='<div class="flex items-start gap-3 mb-3"><span class="text-2xl mt-0.5">'+m.emoji+'</span><div><span class="text-[10px] tracking-[.2em] uppercase font-bold" style="color:'+m.accent+'">'+ml+'</span><h4 class="font-playfair text-base font-semibold text-charcoal-300 mt-0.5">'+m.gameTitle+'</h4></div></div><p class="text-sm text-charcoal-100 font-light leading-relaxed pl-11">'+m.gameMetaphor+'</p><div class="mt-3 ml-11"><div class="game-badge text-white" style="background:linear-gradient(135deg,'+m.accent+','+m.accent+'cc)"><span class="iconify" data-icon="'+m.gameIcon+'" data-width="14"></span>'+m.gameTitle+'</div></div>';
+        document.getElementById('modalGameCard').style.cssText='border-color:'+m.accent+'30;background:'+m.accent+'06';
+        var kp='';for(var i=0;i<m.keyPoints.length;i++)kp+='<div class="flex items-start gap-2.5"><div class="key-dot" style="background:'+m.accent+'"></div><span class="text-sm text-charcoal-100 font-light leading-relaxed">'+m.keyPoints[i]+'</span></div>';
+        document.getElementById('modalKeyPoints').innerHTML=kp;
     } else {
-        document.getElementById('modalTitleArea').innerHTML='<div class="flex flex-col gap-3"><input type="text" value="'+m.topic.replace(/"/g,'&quot;')+'" class="edit-input font-bold" onchange="updateMeta('+idx+',\'topic\',this.value)" placeholder="Topic"><input type="text" value="'+m.subtitle.replace(/"/g,'&quot;')+'" class="edit-input" onchange="updateMeta('+idx+',\'subtitle\',this.value)" placeholder="Subtitle"><input type="text" value="'+m.theme.replace(/"/g,'&quot;')+'" class="edit-input italic" onchange="updateMeta('+idx+',\'theme\',this.value)" placeholder="Theme Metaphor"></div>';
+        document.getElementById('modalTitleArea').innerHTML=
+            '<div class="flex flex-col gap-2">'+
+                '<input type="text" value="'+m.fullName.replace(/"/g,'&quot;')+'" class="edit-input font-bold text-lg" onchange="updateMeta('+idx+',\'fullName\',this.value)" placeholder="Full Name (e.g. May 2026)">'+
+                '<div class="flex gap-2">'+
+                    '<input type="text" value="'+m.emoji+'" class="edit-input w-16 text-center text-2xl" onchange="updateMeta('+idx+',\'emoji\',this.value)" placeholder="📅">'+
+                    '<input type="text" value="'+m.name.replace(/"/g,'&quot;')+'" class="edit-input flex-1" onchange="updateMeta('+idx+',\'name\',this.value)" placeholder="Month Name">'+
+                    '<input type="number" value="'+m.year+'" class="edit-input edit-input-sm" onchange="updateMeta('+idx+',\'year\',parseInt(this.value)||2026)" placeholder="Year">'+
+                '</div>'+
+                '<input type="text" value="'+m.topic.replace(/"/g,'&quot;')+'" class="edit-input font-bold" onchange="updateMeta('+idx+',\'topic\',this.value)" placeholder="Topic">'+
+                '<input type="text" value="'+m.subtitle.replace(/"/g,'&quot;')+'" class="edit-input" onchange="updateMeta('+idx+',\'subtitle\',this.value)" placeholder="Subtitle">'+
+                '<input type="text" value="'+m.theme.replace(/"/g,'&quot;')+'" class="edit-input italic" onchange="updateMeta('+idx+',\'theme\',this.value)" placeholder="Theme Metaphor">'+
+                '<input type="text" value="'+m.accent+'" class="edit-input" onchange="updateMeta('+idx+',\'accent\',this.value)" placeholder="Accent Color (e.g. #C9A96E)">'+
+                '<button class="reset-btn mt-2" onclick="deleteMonth('+idx+')"><span class="iconify" data-icon="lucide:trash-2" data-width="13"></span> Delete This Month</button>'+
+            '</div>';
         document.getElementById('modalDescription').innerHTML='<textarea class="edit-input w-full h-32" onchange="updateMeta('+idx+',\'description\',this.value)" placeholder="Detailed description...">'+m.description.replace(/"/g,'&quot;')+'</textarea>';
+        document.getElementById('modalGameCard').innerHTML=
+            '<div class="flex flex-col gap-2">'+
+                '<input type="text" value="'+m.gameTitle.replace(/"/g,'&quot;')+'" class="edit-input font-bold" onchange="updateMeta('+idx+',\'gameTitle\',this.value)" placeholder="Game Title">'+
+                '<input type="text" value="'+m.gameIcon.replace(/"/g,'&quot;')+'" class="edit-input" onchange="updateMeta('+idx+',\'gameIcon\',this.value)" placeholder="Game Icon (e.g. lucide:layers)">'+
+                '<textarea class="edit-input w-full h-24" onchange="updateMeta('+idx+',\'gameMetaphor\',this.value)" placeholder="Game Metaphor...">'+m.gameMetaphor.replace(/"/g,'&quot;')+'</textarea>'+
+                '<select class="edit-input" onchange="updateMeta('+idx+',\'special\',this.value===\'null\'?null:this.value)">'+
+                    '<option value="null" '+(m.special===null?'selected':'')+'>Normal</option>'+
+                    '<option value="haunted" '+(m.special==='haunted'?'selected':'')+'>Haunted</option>'+
+                    '<option value="advent" '+(m.special==='advent'?'selected':'')+'>Advent</option>'+
+                    '<option value="race" '+(m.special==='race'?'selected':'')+'>Race</option>'+
+                '</select>'+
+            '</div>';
+        document.getElementById('modalGameCard').style.cssText='';
+        var kp='<div class="space-y-2">';
+        for(var ki=0;ki<m.keyPoints.length;ki++){
+            kp+='<div class="flex items-center gap-2">'+
+                '<input type="text" value="'+m.keyPoints[ki].replace(/"/g,'&quot;')+'" class="edit-input flex-1" onchange="updateKeyPoint('+idx+','+ki+',this.value)" placeholder="Key point...">'+
+                '<button class="session-delete" onclick="removeKeyPoint('+idx+','+ki+')"><span class="iconify" data-icon="lucide:x" data-width="13"></span></button>'+
+            '</div>';
+        }
+        kp+='<button class="add-session-btn mt-2" onclick="addKeyPoint('+idx+')"><span class="iconify" data-icon="lucide:plus" data-width="14"></span> Add Key Point</button></div>';
+        document.getElementById('modalKeyPoints').innerHTML=kp;
     }
-    document.getElementById('modalGameCard').innerHTML='<div class="flex items-start gap-3 mb-3"><span class="text-2xl mt-0.5">'+m.emoji+'</span><div><span class="text-[10px] tracking-[.2em] uppercase font-bold" style="color:'+m.accent+'">'+ml+'</span><h4 class="font-playfair text-base font-semibold text-charcoal-300 mt-0.5">'+m.gameTitle+'</h4></div></div><p class="text-sm text-charcoal-100 font-light leading-relaxed pl-11">'+m.gameMetaphor+'</p><div class="mt-3 ml-11"><div class="game-badge text-white" style="background:linear-gradient(135deg,'+m.accent+','+m.accent+'cc)"><span class="iconify" data-icon="'+m.gameIcon+'" data-width="14"></span>'+m.gameTitle+'</div></div>';
-    document.getElementById('modalGameCard').style.cssText='border-color:'+m.accent+'30;background:'+m.accent+'06';
-    var kp='';for(var i=0;i<m.keyPoints.length;i++)kp+='<div class="flex items-start gap-2.5"><div class="key-dot" style="background:'+m.accent+'"></div><span class="text-sm text-charcoal-100 font-light leading-relaxed">'+m.keyPoints[i]+'</span></div>';
-    document.getElementById('modalKeyPoints').innerHTML=kp;
     document.getElementById('modalSessions').innerHTML=renderSessions(m,editMode);
     document.getElementById('addSessionBtn').classList.toggle('hidden',!editMode);
     document.getElementById('calEditHint').classList.toggle('hidden',!editMode);
