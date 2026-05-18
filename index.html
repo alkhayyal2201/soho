@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soho Group — Training Calendar May 2026 – April 2027</title>
+    <title>Soho Group — Training Calendar May 2026 – December 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -254,7 +254,7 @@
                 </button>
                 <span id="saveStatus" class="text-[10px] tracking-[.25em] uppercase font-light text-charcoal-50 hidden" style="letter-spacing:.2em"></span>
                 <span class="hidden md:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Training Calendar</span>
-                <div class="year-badge"><span class="dot"></span>2026 — 2027</div>
+                <div class="year-badge"><span class="dot"></span>2026</div>
             </div>
         </div>
     </nav>
@@ -286,13 +286,13 @@
                     <div class="w-8 h-px bg-gold-300"></div>
                     <span class="iconify text-gold-400" data-icon="lucide:arrow-right" data-width="14"></span>
                     <div class="w-8 h-px bg-gold-300"></div>
-                    <span class="text-sm font-medium text-charcoal-200">April 2027</span>
+                    <span class="text-sm font-medium text-charcoal-200">December 2026</span>
                 </div>
             </div>
             <div class="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10 anim-in" style="animation-delay:.65s">
-                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500">9</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Core Topics</div></div>
+                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500" id="statTopics">8</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Core Topics</div></div>
                 <div class="w-px h-12 bg-gold-200"></div>
-                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500">12</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Months</div></div>
+                <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500" id="statMonths">8</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Months</div></div>
                 <div class="w-px h-12 bg-gold-200"></div>
                 <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500" id="statSessions">48</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Sessions</div></div>
             </div>
@@ -521,7 +521,7 @@ function renderGrid(){
     }
     g.innerHTML=html;updateStats();setTimeout(initScrollPopup,100);
 }
-function updateStats(){var d=getData(),t=0;for(var i=0;i<d.length;i++)t+=d[i].sessions.length;document.getElementById('statSessions').textContent=t}
+function updateStats(){var d=getData(),t=0;for(var i=0;i<d.length;i++){t+=d[i].sessions.length;}document.getElementById('statSessions').textContent=t;document.getElementById('statTopics').textContent=d.length;document.getElementById('statMonths').textContent=d.length}
 
 /* ===== CALENDAR ===== */
 function genCal(mi,y,td,acc,isH,isEdit){
@@ -565,6 +565,7 @@ function renderSessions(m,isEdit){
 function updateSession(si,field,val){var d=getData()[currentModalIdx];if(field==='day'){val=Math.max(1,Math.min(31,val||1));d.sessions[si].day=val}else{d.sessions[si][field]=val}saveSessions()}
 function addSession(){var d=getData()[currentModalIdx],nd=1;for(var i=1;i<=31;i++){if(d.trainingDays.indexOf(i)<0){nd=i;break}}d.sessions.push({day:nd,title:'New Session',time:'10:00 AM – 12:00 PM'});if(d.trainingDays.indexOf(nd)<0){d.trainingDays.push(nd);d.trainingDays.sort(function(a,b){return a-b});saveDays()}saveSessions();openModal(currentModalIdx);updateStats();toast('Session added','success')}
 function removeSession(si){showConfirm('Remove this session?',function(){var d=getData()[currentModalIdx];d.sessions.splice(si,1);saveSessions();openModal(currentModalIdx);updateStats();toast('Session removed','info')})}
+function updateMeta(idx,field,val){getData()[idx][field]=val;renderGrid();scheduleSave();toast('Updated '+field,'success')}
 
 /* ===== FILES ===== */
 function triggerFileInput(){pendingFileIdx=currentModalIdx;document.getElementById('fileInput').click()}
@@ -662,10 +663,15 @@ function openModal(idx){
     hdr.className=isH?'relative px-6 sm:px-10 pt-10 pb-6 border-b haunted-header':'relative px-6 sm:px-10 pt-10 pb-6 border-b border-gold-200/40';
     var tc=isH?'text-green-100/90':'',sc=isH?'text-green-200/60':'text-charcoal-50';
     var ml=isH?'👻 Haunted Metaphor':m.special==='advent'?'🎄 Advent Metaphor':'Game Metaphor';
-    document.getElementById('modalTitleArea').innerHTML='<div class="relative z-10 flex items-center gap-4 mb-3"><span class="text-5xl float-anim">'+m.emoji+'</span><div><h2 class="font-playfair text-2xl sm:text-3xl font-semibold tracking-tight '+tc+'">'+m.fullName+'</h2><div class="flex flex-wrap items-center gap-2 mt-1"><span class="text-xs tracking-[.15em] uppercase font-bold px-3 py-1 rounded-full border" style="color:'+m.accent+';border-color:'+m.accent+'40;background:'+m.accent+'10">'+m.topic+'</span><span class="text-xs '+sc+' font-light">'+m.subtitle+'</span></div></div></div><p class="font-playfair text-base sm:text-lg italic '+(isH?'text-green-300/50':'text-charcoal-200')+' relative z-10">"'+m.theme+'"</p>';
+    if(!editMode){
+        document.getElementById('modalTitleArea').innerHTML='<div class="relative z-10 flex items-center gap-4 mb-3"><span class="text-5xl float-anim">'+m.emoji+'</span><div><h2 class="font-playfair text-2xl sm:text-3xl font-semibold tracking-tight '+tc+'">'+m.fullName+'</h2><div class="flex flex-wrap items-center gap-2 mt-1"><span class="text-xs tracking-[.15em] uppercase font-bold px-3 py-1 rounded-full border" style="color:'+m.accent+';border-color:'+m.accent+'40;background:'+m.accent+'10">'+m.topic+'</span><span class="text-xs '+sc+' font-light">'+m.subtitle+'</span></div></div></div><p class="font-playfair text-base sm:text-lg italic '+(isH?'text-green-300/50':'text-charcoal-200')+' relative z-10">"'+m.theme+'"</p>';
+        document.getElementById('modalDescription').textContent=m.description;
+    } else {
+        document.getElementById('modalTitleArea').innerHTML='<div class="flex flex-col gap-3"><input type="text" value="'+m.topic.replace(/"/g,'&quot;')+'" class="edit-input font-bold" onchange="updateMeta('+idx+',\'topic\',this.value)" placeholder="Topic"><input type="text" value="'+m.subtitle.replace(/"/g,'&quot;')+'" class="edit-input" onchange="updateMeta('+idx+',\'subtitle\',this.value)" placeholder="Subtitle"><input type="text" value="'+m.theme.replace(/"/g,'&quot;')+'" class="edit-input italic" onchange="updateMeta('+idx+',\'theme\',this.value)" placeholder="Theme Metaphor"></div>';
+        document.getElementById('modalDescription').innerHTML='<textarea class="edit-input w-full h-32" onchange="updateMeta('+idx+',\'description\',this.value)" placeholder="Detailed description...">'+m.description.replace(/"/g,'&quot;')+'</textarea>';
+    }
     document.getElementById('modalGameCard').innerHTML='<div class="flex items-start gap-3 mb-3"><span class="text-2xl mt-0.5">'+m.emoji+'</span><div><span class="text-[10px] tracking-[.2em] uppercase font-bold" style="color:'+m.accent+'">'+ml+'</span><h4 class="font-playfair text-base font-semibold text-charcoal-300 mt-0.5">'+m.gameTitle+'</h4></div></div><p class="text-sm text-charcoal-100 font-light leading-relaxed pl-11">'+m.gameMetaphor+'</p><div class="mt-3 ml-11"><div class="game-badge text-white" style="background:linear-gradient(135deg,'+m.accent+','+m.accent+'cc)"><span class="iconify" data-icon="'+m.gameIcon+'" data-width="14"></span>'+m.gameTitle+'</div></div>';
     document.getElementById('modalGameCard').style.cssText='border-color:'+m.accent+'30;background:'+m.accent+'06';
-    document.getElementById('modalDescription').textContent=m.description;
     var kp='';for(var i=0;i<m.keyPoints.length;i++)kp+='<div class="flex items-start gap-2.5"><div class="key-dot" style="background:'+m.accent+'"></div><span class="text-sm text-charcoal-100 font-light leading-relaxed">'+m.keyPoints[i]+'</span></div>';
     document.getElementById('modalKeyPoints').innerHTML=kp;
     document.getElementById('modalSessions').innerHTML=renderSessions(m,editMode);
