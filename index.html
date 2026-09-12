@@ -261,6 +261,7 @@
                     <span class="hidden sm:inline">Add Month</span>
                 </button>
                 <span id="saveStatus" class="text-[10px] tracking-[.25em] uppercase font-light text-charcoal-50 hidden" style="letter-spacing:.2em"></span>
+                <span id="userChip" class="hidden md:flex items-center gap-2 text-xs text-charcoal-100"></span>
                 <span class="hidden md:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Training Calendar</span>
                 <div class="year-badge"><span class="dot"></span>2026</div>
             </div>
@@ -402,7 +403,11 @@
         </div>
     </footer>
 
+<script src="auth.js"></script>
 <script>
+SohoAuth.requireAuth();
+SohoAuth.renderChip();
+SohoAuth.refreshMe().then(function(){ SohoAuth.renderChip(); }).catch(function(){});
 var LOGO='https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f';
 var DB_NAME='SohoTrainingDB',DB_VER=1,STORE='attachments';
 

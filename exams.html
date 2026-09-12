@@ -58,6 +58,7 @@ pre.json{background:#2C2C2C;color:#E8D5B0;border-radius:12px;padding:16px;font-s
       <a href="index.html" class="btn-ghost !py-2 !px-4"><span class="iconify" data-icon="lucide:calendar" data-width="14"></span><span class="hidden sm:inline">Calendar</span></a>
       <button id="manageBtn" class="btn-ghost !py-2 !px-4" onclick="toggleManage()"><span class="iconify" data-icon="lucide:settings-2" data-width="14"></span><span class="hidden sm:inline" id="manageBtnLabel">Manage</span></button>
       <span id="saveStatus" class="text-[10px] tracking-[.2em] uppercase font-light text-charcoal-50 hidden"></span>
+      <span id="userChip" class="hidden md:flex items-center gap-2 text-xs text-charcoal-100"></span>
     </div>
   </div>
 </nav>
@@ -207,7 +208,14 @@ pre.json{background:#2C2C2C;color:#E8D5B0;border-radius:12px;padding:16px;font-s
   <p class="text-xs text-charcoal-50 font-light">© 2026 Soho Group · Exams — crafted with excellence. <a href="index.html" class="underline">Back to calendar</a></p>
 </footer>
 
+<script src="auth.js"></script>
 <script>
+SohoAuth.requireAuth();
+SohoAuth.renderChip();
+SohoAuth.refreshMe().then(function(){
+  SohoAuth.renderChip();
+  if(!SohoAuth.isAdmin()){ var b=document.getElementById('manageBtn'); if(b) b.style.display='none'; }
+}).catch(function(){});
 var EXAMS_URL='/api/exams';
 var exams=[];
 var currentExam=null, answers={}, lastResult=null, manageOpen=false, builderQuestions=[], builderId=null;
@@ -365,6 +373,7 @@ function backToExam(){if(!currentExam||!lastResult)return;showView('takeView');r
 
 /* ---------- manage / builder ---------- */
 function toggleManage(forceBack){
+  if(!SohoAuth.isAdmin()){ toast('Exam publishing is admin only','error'); return; }
   if(forceBack===true&&manageOpen){manageOpen=false;document.getElementById('manageBtnLabel').textContent='Manage';showList();return}
   manageOpen=!manageOpen;
   document.getElementById('manageBtnLabel').textContent=manageOpen?'Exit':'Manage';

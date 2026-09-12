@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soho Group — Users</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{cream:{50:'#FDFCFA',100:'#FAF7F2',200:'#F5EFE3',300:'#EDE5D5'},gold:{50:'#FBF6ED',100:'#F5EFE3',200:'#E8D5B0',300:'#D4B978',400:'#C9A96E',500:'#A8894F',600:'#8B7240',700:'#6E5A32'},charcoal:{50:'#8A8178',100:'#6B6560',200:'#4A4540',300:'#2C2C2C'}},fontFamily:{playfair:['"Playfair Display"','serif'],lato:['Lato','sans-serif']}}}}
+</script>
+<style>
+body{font-family:'Lato',sans-serif}
+.bg-pattern{background-image:radial-gradient(ellipse at 15% 30%,rgba(201,169,110,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(201,169,110,.04) 0%,transparent 50%),radial-gradient(ellipse at 50% 85%,rgba(201,169,110,.05) 0%,transparent 55%)}
+.ornament{display:inline-flex;align-items:center;gap:10px;color:#C9A96E;font-size:10px;letter-spacing:.2em}
+.ornament::before,.ornament::after{content:'';width:50px;height:1px;background:#C9A96E}
+.edit-input{background:#fff;border:1px solid rgba(201,169,110,.3);border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Lato',sans-serif;color:#2C2C2C;width:100%;outline:none;transition:all .2s ease}
+.edit-input:focus{border-color:#C9A96E;box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#C9A96E,#D4B978);color:#fff;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;transition:all .25s ease}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(201,169,110,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#6B6560;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid #E8D5B0;transition:all .25s ease}
+.btn-ghost:hover{border-color:#C9A96E;color:#A8894F;background:rgba(201,169,110,.06)}
+.btn-danger{display:inline-flex;align-items:center;gap:6px;background:transparent;color:#b94a4a;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1px solid rgba(200,80,80,.3)}
+.btn-danger:hover{background:rgba(200,80,80,.07)}
+.btn-mini{display:inline-flex;align-items:center;gap:5px;background:transparent;color:#6B6560;padding:5px 12px;border-radius:100px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid #E8D5B0;white-space:nowrap}
+.btn-mini:hover{border-color:#C9A96E;color:#A8894F}
+.toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;pointer-events:auto;animation:toastIn .35s ease forwards;box-shadow:0 8px 30px rgba(44,44,44,.15)}
+.toast.success{background:#2C2C2C;color:#fff}
+.toast.info{background:#fff;color:#2C2C2C;border:1px solid rgba(201,169,110,.3)}
+.toast.error{background:rgba(200,80,80,.92);color:#fff}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.user-row{background:#fff;border:1px solid rgba(201,169,110,.18);border-radius:14px;padding:16px 18px}
+select.edit-input{width:auto}
+</style>
+</head>
+<body class="bg-cream-100 text-charcoal-300 bg-pattern min-h-screen">
+<div class="toast-container" id="toastContainer"></div>
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-cream-100/85 backdrop-blur-lg border-b border-gold-200/50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="h-9 w-auto object-contain rounded">
+      <span class="hidden sm:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Users</span>
+    </a>
+    <div id="userChip" class="flex items-center gap-2 text-xs text-charcoal-100"></div>
+  </div>
+</nav>
+
+<main class="relative z-10 max-w-4xl mx-auto px-6 pt-28 pb-24">
+  <div class="text-center mb-8">
+    <div class="ornament mb-3">ADMIN ONLY</div>
+    <h1 class="font-playfair text-3xl sm:text-4xl font-semibold">Manage <span class="italic text-gold-500">Users</span></h1>
+    <p class="text-charcoal-50 text-sm mt-2 font-light">No signup — admins create every account and decide every username &amp; password.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <!-- my password -->
+    <section class="bg-white rounded-2xl border border-gold-200/50 p-6">
+      <h2 class="font-playfair text-lg font-semibold">My password</h2>
+      <p class="text-xs text-charcoal-50 font-light mt-1 mb-4">Signed in as <b id="meName"></b>. Change your own password anytime.</p>
+      <div class="space-y-2">
+        <input id="myCur" type="password" class="edit-input" placeholder="Current password" autocomplete="current-password">
+        <input id="myNew1" type="password" class="edit-input" placeholder="New password (min 6 characters)" autocomplete="new-password">
+        <input id="myNew2" type="password" class="edit-input" placeholder="Repeat new password" autocomplete="new-password">
+        <button class="btn-gold" onclick="changeMine()"><span class="iconify" data-icon="lucide:key-round" data-width="14"></span> Change my password</button>
+      </div>
+    </section>
+
+    <!-- add user -->
+    <section class="bg-white rounded-2xl border border-gold-200/50 p-6">
+      <h2 class="font-playfair text-lg font-semibold">Add user</h2>
+      <p class="text-xs text-charcoal-50 font-light mt-1 mb-4">You decide the username and the first password. New users must change it on first sign-in.</p>
+      <div class="space-y-2">
+        <input id="n_user" class="edit-input" placeholder="Username *  (3–30: letters, numbers, . _ -)" autocapitalize="none">
+        <input id="n_name" class="edit-input" placeholder="Display name  (e.g. Bayram)">
+        <div class="flex gap-2">
+          <input id="n_pass" class="edit-input flex-1" placeholder="Temporary password * (min 6)">
+          <button class="btn-mini" title="Generate random password" onclick="genPass()"><span class="iconify" data-icon="lucide:dices" data-width="14"></span></button>
+        </div>
+        <div class="flex gap-2">
+          <select id="n_role" class="edit-input flex-1"><option value="user">Staff</option><option value="manager">Manager</option></select>
+          <label class="flex items-center gap-2 text-sm border border-gold-200 rounded-lg px-3 flex-1"><input type="checkbox" id="n_admin" checked class="accent-[#C9A96E]"> Admin</label>
+        </div>
+        <button class="btn-gold" onclick="addUser()"><span class="iconify" data-icon="lucide:user-plus" data-width="14"></span> Create user</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="mt-6 bg-white rounded-2xl border border-gold-200/50 p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-playfair text-lg font-semibold">All users <span id="uCount" class="text-sm text-charcoal-50 font-lato font-light"></span></h2>
+      <button class="btn-mini" onclick="loadUsers()"><span class="iconify" data-icon="lucide:refresh-cw" data-width="13"></span> Refresh</button>
+    </div>
+    <div id="userList" class="space-y-3"></div>
+  </section>
+</main>
+
+<script src="auth.js"></script>
+<script>
+var me = SohoAuth.requireAdmin();
+var users = [];
+function toast(msg,type){type=type||'info';var c=document.getElementById('toastContainer'),t=document.createElement('div');t.className='toast '+type;t.textContent=msg;c.appendChild(t);setTimeout(function(){t.remove()},2600)}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+if (me) {
+  document.getElementById('meName').textContent = me.user.displayName || me.user.username;
+  SohoAuth.renderChip();
+  loadUsers();
+}
+function loadUsers(){
+  SohoAuth.api('list').then(function(list){
+    users = list;
+    document.getElementById('uCount').textContent = '(' + list.length + ')';
+    renderUsers();
+  }).catch(function(e){ toast(e.message, 'error'); });
+}
+function renderUsers(){
+  var box = document.getElementById('userList'), h = '';
+  var myName = me.user.username;
+  users.forEach(function(u){
+    var temp = u.mustChangePassword ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold-100 text-gold-600">temp password</span>' : '';
+    var adminBadge = u.admin ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-charcoal-300 text-white">admin</span>' : '';
+    var roleLabel = u.role === 'manager' ? 'Manager' : 'Staff';
+    var isMe = u.username === myName;
+    h += '<div class="user-row" id="row_' + esc(u.username) + '">';
+    h += '<div class="flex flex-wrap items-center gap-2">';
+    h += '<div class="flex-1 min-w-[140px]"><p class="font-medium text-[15px">' + esc(u.displayName) + ' <span class="text-charcoal-50 font-light text-sm">@' + esc(u.username) + '</span></p>';
+    h += '<p class="text-xs text-charcoal-50 mt-0.5">' + roleLabel + '</p></div>';
+    h += adminBadge + temp;
+    h += '</div>';
+    // admin controls
+    h += '<div class="flex flex-wrap items-center gap-2 mt-3">';
+    h += '<select class="edit-input !w-auto !py-1.5 !text-xs" onchange="setRole(\'' + esc(u.username) + '\', this.value)" title="Role"><option value="user"' + (u.role !== 'manager' ? ' selected' : '') + '>Staff</option><option value="manager"' + (u.role === 'manager' ? ' selected' : '') + '>Manager</option></select>';
+    h += '<button class="btn-mini" onclick="toggleAdmin(\'' + esc(u.username) + '\',' + (!u.admin) + ')">' + (u.admin ? 'Remove admin' : 'Make admin') + '</button>';
+    h += '<button class="btn-mini" onclick="pwRow(\'' + esc(u.username) + '\')"><span class="iconify" data-icon="lucide:key-round" data-width="12"></span> Set password</button>';
+    if (!isMe) h += '<button class="btn-danger" onclick="delUser(\'' + esc(u.username) + '\',\'' + esc(u.displayName).replace(/'/g, "\\'") + '\')">Delete</button>';
+    else h += '<span class="text-[11px] text-charcoal-50">(this is you)</span>';
+    h += '</div>';
+    h += '<div class="pw-zone mt-2 hidden" id="pw_' + esc(u.username) + '"></div>';
+    h += '</div>';
+  });
+  box.innerHTML = h || '<p class="text-sm text-charcoal-50 font-light">No users.</p>';
+}
+function changeMine(){
+  var c = document.getElementById('myCur').value, a = document.getElementById('myNew1').value, b = document.getElementById('myNew2').value;
+  if (a.length < 6){ toast('New password must be at least 6 characters', 'error'); return; }
+  if (a !== b){ toast('New passwords do not match', 'error'); return; }
+  SohoAuth.api('change-password', {currentPassword:c, newPassword:a}).then(function(){
+    document.getElementById('myCur').value = document.getElementById('myNew1').value = document.getElementById('myNew2').value = '';
+    toast('Your password is changed', 'success');
+  }).catch(function(e){ toast(e.message, 'error'); });
+}
+function genPass(){
+  var words = ['Soho','Gold','Star','Lux','Velvet','Crown'];
+  var w = words[Math.floor(Math.random()*words.length)];
+  var n = Math.floor(1000 + Math.random()*9000);
+  document.getElementById('n_pass').value = w + '#' + n + 'Soho';
+}
+function addUser(){
+  var u = document.getElementById('n_user').value.trim();
+  var n = document.getElementById('n_name').value.trim() || u;
+  var p = document.getElementById('n_pass').value;
+  var r = document.getElementById('n_role').value;
+  var a = document.getElementById('n_admin').checked;
+  if (!u){ toast('Username is required', 'error'); return; }
+  SohoAuth.api('create', {username:u, password:p, displayName:n, role:r, admin:a}).then(function(){
+    document.getElementById('n_user').value = document.getElementById('n_name').value = document.getElementById('n_pass').value = '';
+    toast('User @' + u.toLowerCase() + ' created — share the temporary password with them', 'success');
+    loadUsers();
+  }).catch(function(e){ toast(e.message, 'error'); });
+}
+function setRole(username, role){
+  SohoAuth.api('update', {username:username, role:role}).then(function(){ toast('Role updated', 'success'); loadUsers(); }).catch(function(e){ toast(e.message, 'error'); loadUsers(); });
+}
+function toggleAdmin(username, want){
+  SohoAuth.api('update', {username:username, admin:want}).then(function(){ toast(want ? '@'+username+' is now admin' : 'Admin removed from @'+username, 'success'); loadUsers(); }).catch(function(e){ toast(e.message, 'error'); loadUsers(); });
+}
+function pwRow(username){
+  var z = document.getElementById('pw_' + username);
+  z.classList.toggle('hidden');
+  z.innerHTML = '<div class="flex flex-wrap gap-2 items-center bg-cream-100 border border-gold-200 rounded-lg p-2">'
+    + '<input id="npw_' + esc(username) + '" class="edit-input !w-56" placeholder="New password (min 6)">'
+    + '<label class="flex items-center gap-1.5 text-xs"><input type="checkbox" id="reqc_' + esc(username) + '" checked class="accent-[#C9A96E]"> Must change on next sign-in</label>'
+    + '<button class="btn-mini" onclick="savePw(\'' + esc(username) + '\')">Save</button></div>';
+}
+function savePw(username){
+  var p = document.getElementById('npw_' + username).value;
+  var rc = document.getElementById('reqc_' + username).checked;
+  SohoAuth.api('set-password', {username:username, newPassword:p, requireChange:rc}).then(function(){
+    toast('Password set for @' + username + ' — share it with them', 'success'); loadUsers();
+  }).catch(function(e){ toast(e.message, 'error'); });
+}
+function delUser(username, display){
+  if (!confirm('Delete user "' + display + ' (@' + username + ')"? They will lose access immediately.')) return;
+  SohoAuth.api('delete', {username:username}).then(function(){ toast('User deleted', 'info'); loadUsers(); }).catch(function(e){ toast(e.message, 'error'); });
+}
+</script>
+</body>
+</html>
