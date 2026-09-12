@@ -1,2 +1,4 @@
 /data.json
   Cache-Control: no-store
+/exams.json
+  Cache-Control: no-store

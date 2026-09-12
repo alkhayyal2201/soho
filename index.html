@@ -248,6 +248,10 @@
                 <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="soho-logo-img h-9 w-auto object-contain">
             </div>
             <div class="flex items-center gap-3 sm:gap-4">
+                <a href="exams.html" class="edit-btn !no-underline" style="text-decoration:none">
+                    <span class="iconify" data-icon="lucide:file-check-2" data-width="13"></span>
+                    <span class="hidden sm:inline">Exams</span>
+                </a>
                 <button id="editToggle" class="edit-btn" onclick="toggleEditMode()">
                     <span class="iconify" data-icon="lucide:pencil" data-width="13"></span>
                     <span class="hidden sm:inline">Edit</span>
@@ -292,6 +296,12 @@
                     <div class="w-8 h-px bg-gold-300"></div>
                     <span class="text-sm font-medium text-charcoal-200">December 2026</span>
                 </div>
+            </div>
+            <div class="anim-in flex flex-wrap justify-center gap-3 mt-6" style="animation-delay:.6s">
+                <a href="exams.html" class="inline-flex items-center gap-2 text-white text-xs font-bold tracking-[.12em] uppercase px-7 py-3.5 rounded-full shadow-lg hover:-translate-y-0.5 transition-all" style="background:linear-gradient(135deg,#C9A96E,#D4B978);text-decoration:none">
+                    <span class="iconify" data-icon="lucide:file-check-2" data-width="15"></span>
+                    Browse Exams — submit &amp; graded instantly
+                </a>
             </div>
             <div class="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10 anim-in" style="animation-delay:.65s">
                 <div class="text-center"><div class="font-playfair text-2xl sm:text-3xl font-semibold text-gold-500" id="statTopics">8</div><div class="text-xs tracking-[.2em] uppercase text-charcoal-50 mt-1">Core Topics</div></div>
@@ -340,6 +350,15 @@
                                 </button>
                             </div>
                             <div id="modalSessions"></div>
+                        </div>
+                        <div id="examCta" class="rounded-xl border p-5 flex flex-wrap items-center justify-between gap-3" style="border-color:#C9A96E40;background:#C9A96E08">
+                            <div>
+                                <div class="text-[10px] tracking-[.2em] uppercase font-bold text-gold-500">Month exam</div>
+                                <div class="text-sm font-medium mt-0.5">Test yourself on this topic — instant grading</div>
+                            </div>
+                            <a id="examCtaBtn" href="exams.html" class="inline-flex items-center gap-2 text-white text-[11px] font-bold tracking-[.1em] uppercase px-5 py-2.5 rounded-full" style="background:linear-gradient(135deg,#C9A96E,#D4B978);text-decoration:none">
+                                <span class="iconify" data-icon="lucide:file-check-2" data-width="14"></span> Open exams
+                            </a>
                         </div>
                         <div id="attachmentsSection" class="">
                             <h4 class="text-xs tracking-[.2em] uppercase text-gold-500 font-bold mb-4">

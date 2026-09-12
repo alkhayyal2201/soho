@@ -1,0 +1,255 @@
+[
+  {
+    "id": "alo-yoga-certification",
+    "title": "Alo Yoga Product Knowledge Certification Exam",
+    "project": "Alo Yoga",
+    "month": null,
+    "description": "This comprehensive exam tests your knowledge of Alo Yoga fabrics, product lines, and selling strategies.",
+    "instructions": "Answer all questions. Multiple choice and True/False are graded instantly. Short answers are keyword-graded instantly and show a model answer for review.",
+    "passScore": 70,
+    "timeLimitMin": 0,
+    "shuffle": false,
+    "questions": [
+      {
+        "id": "s1q1",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "What does the acronym 'Alo' stand for?",
+        "options": [
+          "Active, Lifestyle, Outdoors",
+          "Air, Land, Ocean",
+          "Athletic, Leisure, Original",
+          "All day, Lounge, Overcome"
+        ],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Alo = Air, Land, Ocean."
+      },
+      {
+        "id": "s1q2",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which fabric offers the highest compression and a sculpting fit with a subtle sheen?",
+        "options": ["Airbrush", "Alosoft", "Airlift", "Vapor"],
+        "answer": 2,
+        "points": 2,
+        "explanation": "Airlift is the highest-compression sculpting fabric."
+      },
+      {
+        "id": "s1q3",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which fabric is designed with a soft-matte finish and creates a 'blurring' effect to smooth skin appearance?",
+        "options": ["Airlift", "Airbrush", "Seamless", "Waffle"],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Airbrush has the soft-matte blurring effect."
+      },
+      {
+        "id": "s1q4",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which Alo Yoga men's line is specifically designed for high-intensity HIIT and cardio workouts?",
+        "options": ["Conquer Line", "Double Take Line", "Circuit Line", "Chill Line"],
+        "answer": 2,
+        "points": 2,
+        "explanation": "Circuit line = HIIT / cardio."
+      },
+      {
+        "id": "s1q5",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which fabric blend is best recommended for a customer seeking a balance of comfort and stretch?",
+        "options": [
+          "100% Polyester",
+          "Cotton + Elastane",
+          "Wool + Polyester",
+          "Nylon + Rayon"
+        ],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Cotton + Elastane balances comfort and stretch."
+      },
+      {
+        "id": "s1q6",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "What is the primary benefit of the 'Recovery Sneaker'?",
+        "options": [
+          "Maximum speed for running",
+          "High-rebound support for pressure points in feet, knees, and back",
+          "Water-resistance for swimming",
+          "Extra height with a thick platform"
+        ],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Recovery Sneaker = high-rebound support for pressure points."
+      },
+      {
+        "id": "s1q7",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which product line is known for being 'unisex' and features a soft cotton fleece feel?",
+        "options": ["Scholar Line", "Accolade Line", "Circuit Line", "Triumph Line"],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Accolade line = unisex cotton fleece."
+      },
+      {
+        "id": "s1q8",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "For a 'Luxury Buyer' who values finishing and texture, which fabric should you recommend?",
+        "options": [
+          "Standard Polyester",
+          "Cashmere",
+          "Standard Cotton",
+          "Recycled Plastic"
+        ],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Cashmere = luxury finishing and texture."
+      },
+      {
+        "id": "s1q9",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "What is a key characteristic of the 'Scholar' line for men?",
+        "options": [
+          "High-compression athletic fit",
+          "Smart casual, knit-based aesthetic",
+          "Extremely lightweight, sheer fabric",
+          "Waterproof heavy-duty gear"
+        ],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Scholar = smart casual, knit-based."
+      },
+      {
+        "id": "s1q10",
+        "section": "Section 1 — Multiple Choice",
+        "type": "mcq",
+        "q": "Which fabric is best for a customer looking for 'buttery-soft' comfort for lounging or low-impact flow?",
+        "options": ["Airlift", "Alosoft", "Airbrush", "Vapor"],
+        "answer": 1,
+        "points": 2,
+        "explanation": "Alosoft = buttery-soft lounging comfort."
+      },
+      {
+        "id": "s2q1",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "Cashmere is a synthetic fiber derived from petroleum.",
+        "answer": false,
+        "points": 2,
+        "explanation": "False — cashmere is a natural luxury fiber."
+      },
+      {
+        "id": "s2q2",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "The 'Chill' line is designed primarily for high-intensity training sessions.",
+        "answer": false,
+        "points": 2,
+        "explanation": "False — Chill is for lounge / travel."
+      },
+      {
+        "id": "s2q3",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "Airlift fabric provides the strongest hold among all Alo legging fabrics.",
+        "answer": true,
+        "points": 2,
+        "explanation": "True."
+      },
+      {
+        "id": "s2q4",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "The 'Double Take' line offers a polished, 'smart casual' aesthetic for men.",
+        "answer": true,
+        "points": 2,
+        "explanation": "True."
+      },
+      {
+        "id": "s2q5",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "You should advise customers with fabric sensitivity to wash synthetic garments before their first wear.",
+        "answer": true,
+        "points": 2,
+        "explanation": "True."
+      },
+      {
+        "id": "s2q6",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "The 'Vapor' line is designed for maximum warmth in freezing temperatures.",
+        "answer": false,
+        "points": 2,
+        "explanation": "False."
+      },
+      {
+        "id": "s2q7",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "Alo Yoga was founded in Los Angeles in 2007.",
+        "answer": true,
+        "points": 2,
+        "explanation": "True."
+      },
+      {
+        "id": "s2q8",
+        "section": "Section 2 — True or False",
+        "type": "tf",
+        "q": "The 'Waffle' line features a textured knit fabric that provides light warmth and breathability.",
+        "answer": true,
+        "points": 2,
+        "explanation": "True."
+      },
+      {
+        "id": "s3q1",
+        "section": "Section 3 — Short Answer",
+        "type": "short",
+        "q": "Explain the difference in recommended usage between the 'Conquer' and 'Chill' lines.",
+        "modelAnswer": "Conquer is for high-performance training; Chill is for lounge/travel.",
+        "keywords": ["conquer", "high-performance", "high performance", "training", "chill", "lounge", "travel"],
+        "points": 6,
+        "explanation": "Mention Conquer = high-performance training AND Chill = lounge/travel."
+      },
+      {
+        "id": "s3q2",
+        "section": "Section 3 — Short Answer",
+        "type": "short",
+        "q": "List three 'Core Colors' available at Alo Yoga.",
+        "modelAnswer": "Black, White, Espresso (or Gravel, Gray, Anthracite).",
+        "keywords": ["black", "white", "espresso", "gravel", "gray", "grey", "anthracite"],
+        "minKeywords": 3,
+        "points": 6,
+        "explanation": "Any three core colors: e.g. Black, White, Espresso / Gravel / Gray / Anthracite."
+      },
+      {
+        "id": "s3q3",
+        "section": "Section 3 — Short Answer",
+        "type": "short",
+        "q": "Why is it important to ask customers about their intended activity level when selling Alo apparel?",
+        "modelAnswer": "To match the fabric performance (compression vs comfort) to their specific needs.",
+        "keywords": ["match", "fabric", "performance", "compression", "comfort", "needs", "activity"],
+        "minKeywords": 2,
+        "points": 6,
+        "explanation": "So you can match compression vs comfort to their needs."
+      },
+      {
+        "id": "s3q4",
+        "section": "Section 3 — Short Answer",
+        "type": "short",
+        "q": "What are the key benefits of mixing Elastane into fabric blends like Cotton or Polyester?",
+        "modelAnswer": "Adds stretch, flexibility, and helps the garment retain its shape.",
+        "keywords": ["stretch", "flexibility", "flexible", "shape", "retain"],
+        "minKeywords": 2,
+        "points": 6,
+        "explanation": "Stretch + flexibility + shape retention."
+      }
+    ]
+  }
+]

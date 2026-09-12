@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soho Group — Exams</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{cream:{50:'#FDFCFA',100:'#FAF7F2',200:'#F5EFE3',300:'#EDE5D5'},gold:{50:'#FBF6ED',100:'#F5EFE3',200:'#E8D5B0',300:'#D4B978',400:'#C9A96E',500:'#A8894F',600:'#8B7240',700:'#6E5A32'},charcoal:{50:'#8A8178',100:'#6B6560',200:'#4A4540',300:'#2C2C2C'}},fontFamily:{playfair:['"Playfair Display"','serif'],lato:['Lato','sans-serif']}}}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif}
+.soho-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.013;background-image:url('https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f');background-repeat:repeat;background-size:150px auto}
+.bg-pattern{background-image:radial-gradient(ellipse at 15% 30%,rgba(201,169,110,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(201,169,110,.04) 0%,transparent 50%),radial-gradient(ellipse at 50% 85%,rgba(201,169,110,.05) 0%,transparent 55%)}
+.ornament{display:inline-flex;align-items:center;gap:10px;color:#C9A96E;font-size:10px;letter-spacing:.2em}
+.ornament::before,.ornament::after{content:'';width:50px;height:1px;background:#C9A96E}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.anim-in{animation:fadeUp .7s cubic-bezier(.25,.46,.45,.94) forwards;opacity:0}
+.exam-card{transition:all .35s cubic-bezier(.25,.46,.45,.94);cursor:pointer}
+.exam-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(44,44,44,.1),0 0 0 1px rgba(201,169,110,.3)}
+.opt-label{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid rgba(201,169,110,.2);border-radius:10px;cursor:pointer;transition:all .2s ease;background:#fff}
+.opt-label:hover{border-color:#C9A96E;background:rgba(201,169,110,.04)}
+.opt-label.selected{border-color:#C9A96E;background:rgba(201,169,110,.08);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.opt-label.correct{border-color:#34a853;background:rgba(52,168,83,.07)}
+.opt-label.wrong{border-color:#ea4335;background:rgba(234,67,53,.06)}
+.edit-input{background:#fff;border:1px solid rgba(201,169,110,.3);border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Lato',sans-serif;color:#2C2C2C;width:100%;outline:none;transition:all .2s ease}
+.edit-input:focus{border-color:#C9A96E;box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#C9A96E,#D4B978);color:#fff;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;transition:all .25s ease}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(201,169,110,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#6B6560;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid #E8D5B0;transition:all .25s ease}
+.btn-ghost:hover{border-color:#C9A96E;color:#A8894F;background:rgba(201,169,110,.06)}
+.toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;pointer-events:auto;animation:toastIn .35s ease forwards;box-shadow:0 8px 30px rgba(44,44,44,.15)}
+.toast.success{background:#2C2C2C;color:#fff}
+.toast.info{background:#fff;color:#2C2C2C;border:1px solid rgba(201,169,110,.3)}
+.toast.error{background:rgba(200,80,80,.92);color:#fff}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.score-ring{width:130px;height:130px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto}
+pre.json{background:#2C2C2C;color:#E8D5B0;border-radius:12px;padding:16px;font-size:11.5px;line-height:1.6;overflow:auto;max-height:320px}
+.q-block{background:#fff;border:1px solid rgba(201,169,110,.18);border-radius:14px;padding:20px}
+.section-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#A8894F}
+</style>
+</head>
+<body class="bg-cream-100 text-charcoal-300 bg-pattern min-h-screen">
+<div class="soho-watermark"></div>
+<div class="toast-container" id="toastContainer"></div>
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-cream-100/85 backdrop-blur-lg border-b border-gold-200/50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="https://z-cdn-media.chatglm.cn/files/e41f56d1-00f5-43be-ab53-d385e6349bf9.jpeg?auth_key=1876899052-55dbfcfa37a24229b9b523b240878f85-0-8899d5af5eeb912a148bff28425d967f" alt="SOHO" class="h-9 w-auto object-contain rounded">
+      <span class="hidden sm:block text-xs tracking-[.25em] uppercase text-charcoal-50 font-light">Exams</span>
+    </a>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="index.html" class="btn-ghost !py-2 !px-4"><span class="iconify" data-icon="lucide:calendar" data-width="14"></span><span class="hidden sm:inline">Calendar</span></a>
+      <button id="manageBtn" class="btn-ghost !py-2 !px-4" onclick="toggleManage()"><span class="iconify" data-icon="lucide:settings-2" data-width="14"></span><span class="hidden sm:inline" id="manageBtnLabel">Manage</span></button>
+      <span id="saveStatus" class="text-[10px] tracking-[.2em] uppercase font-light text-charcoal-50 hidden"></span>
+    </div>
+  </div>
+</nav>
+
+<header class="relative pt-28 sm:pt-32 pb-8 px-6 text-center">
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <div class="ornament mb-4 anim-in" style="animation-delay:.05s">SOHO GROUP</div>
+    <h1 class="font-playfair text-4xl sm:text-5xl font-semibold tracking-tight anim-in" style="animation-delay:.15s">Training <span class="italic text-gold-500">Exams</span></h1>
+    <p class="text-charcoal-50 mt-3 font-light anim-in" style="animation-delay:.25s">One exam per project. Submit &amp; get graded instantly — no code edits needed.</p>
+    <div class="mt-5 flex flex-wrap justify-center gap-3 anim-in" style="animation-delay:.3s">
+      <div class="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 border border-gold-200/60 shadow-sm text-sm"><span class="iconify text-gold-400" data-icon="lucide:file-check-2" data-width="16"></span><span id="statExams">0 exams</span><span class="text-charcoal-50">·</span><span id="statQs">0 questions</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="relative z-10 max-w-5xl mx-auto px-6 pb-24">
+
+  <!-- ============ LIST VIEW ============ -->
+  <section id="listView">
+    <div id="examGrid" class="grid sm:grid-cols-2 gap-5"></div>
+    <div class="mt-10 bg-white rounded-2xl border border-gold-200/50 p-6 sm:p-8">
+      <h3 class="font-playfair text-lg font-semibold mb-2">How exams work</h3>
+      <div class="text-sm text-charcoal-100 font-light leading-relaxed space-y-2">
+        <p><b>For staff:</b> click an exam → enter your name → answer → <b>Submit</b> → instant score, per-question feedback, and pass/fail. Your best score is remembered on this device.</p>
+        <p><b>For admins:</b> click <b>Manage</b> (top right) → create or edit exams with the visual form — or paste the clear JSON format. Saving publishes to the whole team instantly. No code changes.</p>
+        <p><b>Grading:</b> Multiple-choice &amp; True/False are exact-graded. Short answers use keyword matching (provisional score) and always show the model answer for review.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAKE VIEW ============ -->
+  <section id="takeView" class="hidden">
+    <button class="btn-ghost mb-5" onclick="showList()"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> All exams</button>
+    <div class="bg-white rounded-2xl border border-gold-200/50 p-6 sm:p-8 mb-5">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <span id="takeProject" class="section-tag"></span>
+          <h2 id="takeTitle" class="font-playfair text-2xl font-semibold mt-1"></h2>
+          <p id="takeDesc" class="text-sm text-charcoal-100 font-light mt-2"></p>
+          <p id="takeMeta" class="text-xs text-charcoal-50 mt-2"></p>
+        </div>
+        <div id="timerBox" class="hidden text-center bg-cream-100 border border-gold-200 rounded-xl px-4 py-2"><div class="text-[10px] tracking-[.2em] uppercase text-gold-500 font-bold">Time left</div><div id="timerText" class="font-playfair text-xl font-semibold">--:--</div></div>
+      </div>
+      <div class="mt-4 grid sm:grid-cols-2 gap-3">
+        <input id="studentName" class="edit-input" placeholder="Your full name (required to submit)">
+        <input id="studentBranch" class="edit-input" placeholder="Branch / store (optional)">
+      </div>
+    </div>
+    <div id="questionList" class="space-y-4"></div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <button class="btn-gold" onclick="submitExam()"><span class="iconify" data-icon="lucide:send" data-width="14"></span> Submit &amp; grade</button>
+      <button class="btn-ghost" onclick="showList()">Cancel</button>
+    </div>
+  </section>
+
+  <!-- ============ RESULT VIEW ============ -->
+  <section id="resultView" class="hidden">
+    <button class="btn-ghost mb-5" onclick="showList()"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> All exams</button>
+    <div class="bg-white rounded-2xl border border-gold-200/50 p-6 sm:p-10 text-center">
+      <div id="scoreRing" class="score-ring"><div id="scorePct" class="font-playfair text-4xl font-semibold"></div><div id="scoreFrac" class="text-xs text-charcoal-50 mt-1"></div></div>
+      <h2 id="resultHeadline" class="font-playfair text-2xl font-semibold mt-4"></h2>
+      <p id="resultSub" class="text-sm text-charcoal-100 font-light mt-2"></p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3">
+        <button class="btn-gold" onclick="retake()"><span class="iconify" data-icon="lucide:rotate-ccw" data-width="14"></span> Retake</button>
+        <button class="btn-ghost" onclick="backToExam()"><span class="iconify" data-icon="lucide:eye" data-width="14"></span> Review answers</button>
+        <button class="btn-ghost" onclick="showList()">All exams</button>
+      </div>
+    </div>
+    <div id="reviewList" class="space-y-4 mt-5"></div>
+  </section>
+
+  <!-- ============ MANAGE / BUILDER VIEW ============ -->
+  <section id="manageView" class="hidden">
+    <button class="btn-ghost mb-5" onclick="toggleManage(true)"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Back to exams</button>
+    <div class="bg-white rounded-2xl border border-gold-200/50 p-6 sm:p-8">
+      <h2 class="font-playfair text-2xl font-semibold">Manage exams — no code needed</h2>
+      <p class="text-sm text-charcoal-100 font-light mt-2">Create a new exam with the form below, or edit an existing one. Press <b>Publish</b> and it appears for the whole team instantly (saved to the site's shared store).</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <select id="editSelect" class="edit-input !w-auto" onchange="loadIntoBuilder(this.value)"></select>
+        <button class="btn-ghost !py-2" onclick="newExamForm()"><span class="iconify" data-icon="lucide:plus" data-width="14"></span> New exam</button>
+        <button class="btn-ghost !py-2" onclick="duplicateExam()"><span class="iconify" data-icon="lucide:copy" data-width="14"></span> Duplicate</button>
+        <button class="btn-ghost !py-2 !text-red-500" onclick="deleteExam()"><span class="iconify" data-icon="lucide:trash-2" data-width="14"></span> Delete</button>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-3 mt-5">
+        <input id="f_title" class="edit-input" placeholder="Exam title *  e.g. Alo Yoga Certification">
+        <input id="f_project" class="edit-input" placeholder="Project / brand *  e.g. Alo Yoga">
+        <input id="f_pass" class="edit-input" type="number" min="0" max="100" value="70" title="Pass score %">
+        <input id="f_time" class="edit-input" type="number" min="0" value="0" title="Time limit minutes (0 = none)">
+      </div>
+      <textarea id="f_desc" class="edit-input mt-3" rows="2" placeholder="Short description shown to staff"></textarea>
+      <textarea id="f_instr" class="edit-input mt-3" rows="2" placeholder="Instructions (optional)"></textarea>
+
+      <h3 class="font-playfair text-lg font-semibold mt-7 mb-3">Questions <span id="qCount" class="text-sm text-charcoal-50 font-lato font-light"></span></h3>
+      <div id="builderQs" class="space-y-3"></div>
+      <div class="mt-4 bg-cream-100 border border-gold-200 rounded-xl p-4">
+        <div class="text-xs tracking-[.15em] uppercase font-bold text-gold-500 mb-3">+ Add a question</div>
+        <textarea id="n_q" class="edit-input" rows="2" placeholder="Question text *"></textarea>
+        <div class="grid sm:grid-cols-3 gap-2 mt-2">
+          <select id="n_type" class="edit-input" onchange="builderTypeChanged()">
+            <option value="mcq">Multiple choice</option>
+            <option value="tf">True / False</option>
+            <option value="short">Short answer</option>
+          </select>
+          <input id="n_points" class="edit-input" type="number" min="1" value="2" title="Points">
+          <input id="n_section" class="edit-input" placeholder="Section label (optional)">
+        </div>
+        <div id="n_mcqWrap" class="mt-2">
+          <textarea id="n_options" class="edit-input" rows="3" placeholder="Options — one per line * (min 2). Star the correct one, e.g.&#10;Active, Lifestyle, Outdoors&#10;* Air, Land, Ocean&#10;Athletic, Leisure, Original"></textarea>
+          <p class="text-[11px] text-charcoal-50 mt-1">Tip: put <b>*</b> in front of the correct option. Or set the answer index below (0 = first).</p>
+          <input id="n_answerIdx" class="edit-input mt-2 !w-40" type="number" min="0" value="0" title="Answer index">
+        </div>
+        <div id="n_tfWrap" class="mt-2 hidden">
+          <select id="n_tfAnswer" class="edit-input !w-48"><option value="true">True (correct)</option><option value="false">False (correct)</option></select>
+        </div>
+        <div id="n_shortWrap" class="mt-2 hidden">
+          <textarea id="n_model" class="edit-input" rows="2" placeholder="Model answer * (shown after submit)"></textarea>
+          <textarea id="n_keywords" class="edit-input mt-2" rows="2" placeholder="Keywords for auto-grading, comma separated * — e.g. conquer, training, chill, lounge"></textarea>
+          <p class="text-[11px] text-charcoal-50 mt-1">Short answers are keyword-graded: if the trainee's text contains enough keywords they earn the points. Model answer is always shown for review.</p>
+        </div>
+        <textarea id="n_explain" class="edit-input mt-2" rows="1" placeholder="Explanation shown after grading (optional)"></textarea>
+        <button class="btn-gold mt-3" onclick="addQuestionFromForm()"><span class="iconify" data-icon="lucide:plus" data-width="14"></span> Add question</button>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button class="btn-gold" onclick="publishBuilder()"><span class="iconify" data-icon="lucide:upload-cloud" data-width="14"></span> Publish exam</button>
+        <button class="btn-ghost" onclick="exportBuilderJSON()"><span class="iconify" data-icon="lucide:download" data-width="14"></span> Export JSON</button>
+        <button class="btn-ghost" onclick="downloadTemplate()"><span class="iconify" data-icon="lucide:file-text" data-width="14"></span> Template</button>
+      </div>
+
+      <details class="mt-6">
+        <summary class="text-sm font-bold cursor-pointer text-gold-600">Advanced: paste / import JSON directly</summary>
+        <p class="text-xs text-charcoal-100 font-light mt-2 mb-2">Clear format — one exam object. <b>mcq</b> needs <code>options</code> + <code>answer</code> (0-based index). <b>tf</b> needs <code>answer: true/false</code>. <b>short</b> needs <code>modelAnswer</code> + <code>keywords</code>.</p>
+        <pre class="json" id="formatHelp"></pre>
+        <textarea id="jsonBox" class="edit-input mt-3" rows="8" placeholder='Paste an exam JSON object here, then click “Load JSON into form”.'></textarea>
+        <div class="mt-2 flex flex-wrap gap-2">
+          <button class="btn-ghost !py-2" onclick="loadJsonIntoForm()">Load JSON into form</button>
+          <button class="btn-ghost !py-2" onclick="document.getElementById('jsonFile').click()">Import .json file</button>
+          <input type="file" id="jsonFile" accept=".json,application/json" class="hidden" onchange="importJsonFile(event)">
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="relative border-t border-gold-200/40 py-10 px-6 text-center">
+  <p class="text-xs text-charcoal-50 font-light">© 2026 Soho Group · Exams — crafted with excellence. <a href="index.html" class="underline">Back to calendar</a></p>
+</footer>
+
+<script>
+var EXAMS_URL='/api/exams';
+var exams=[];
+var currentExam=null, answers={}, lastResult=null, manageOpen=false, builderQuestions=[], builderId=null;
+var timerInt=null, timerEnd=0;
+
+/* ---------- helpers ---------- */
+function toast(msg,type){type=type||'info';var c=document.getElementById('toastContainer'),t=document.createElement('div');t.className='toast '+type;t.textContent=msg;c.appendChild(t);setTimeout(function(){t.remove()},2600)}
+function setSaveStatus(t,ok){var el=document.getElementById('saveStatus');if(!t){el.classList.add('hidden');return}el.classList.remove('hidden');el.textContent=t;el.style.color=ok==='err'?'#b94a4a':'#A8894F'}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function bestScore(id){try{return JSON.parse(localStorage.getItem('soho_best_'+id)||'null')}catch(e){return null}}
+function setBest(id,r){try{var prev=bestScore(id);if(!prev||r.pct>prev.pct)localStorage.setItem('soho_best_'+id,JSON.stringify({pct:r.pct,score:r.score,total:r.total,date:new Date().toLocaleString()}))}catch(e){}}
+function letter(i){return String.fromCharCode(65+i)}
+
+/* ---------- load ---------- */
+function loadExams(){
+  fetch(EXAMS_URL,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(d){exams=d;afterLoad()})
+  .catch(function(){fetch('exams.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){exams=d;afterLoad();toast('Live API unavailable — showing bundled exams.json (publish disabled)','info')}).catch(function(e){document.getElementById('examGrid').innerHTML='<p class="col-span-full text-center py-8 text-sm">Could not load exams. Deploy to Netlify so /api/exams is available.</p>'})});
+}
+function afterLoad(){
+  var nq=0;exams.forEach(function(e){nq+=(e.questions||[]).length});
+  document.getElementById('statExams').textContent=exams.length+' exam'+(exams.length!==1?'s':'');
+  document.getElementById('statQs').textContent=nq+' questions';
+  renderGrid();refreshEditSelect();
+  var params=new URLSearchParams(location.search);
+  var id=params.get('exam');
+  if(id){var f=null;for(var i=0;i<exams.length;i++)if(exams[i].id===id)f=exams[i];if(f)openExam(f.id)}
+}
+
+/* ---------- list ---------- */
+function renderGrid(){
+  var g=document.getElementById('examGrid'),h='';
+  if(!exams.length){g.innerHTML='<div class="col-span-full bg-white rounded-2xl border border-dashed border-gold-300 p-10 text-center"><p class="font-playfair text-xl font-semibold">No exams yet</p><p class="text-sm text-charcoal-50 mt-2 font-light">Click Manage → New exam to publish the first one. No code needed.</p></div>';return}
+  for(var i=0;i<exams.length;i++){var e=exams[i],qs=(e.questions||[]).length,mcq=0,tf=0,sh=0,pts=0;
+    e.questions.forEach(function(q){pts+=(+q.points||1);if(q.type==='mcq')mcq++;else if(q.type==='tf')tf++;else sh++});
+    var best=bestScore(e.id);
+    h+='<div class="exam-card bg-white rounded-2xl border border-gold-200/50 p-6 anim-in" style="animation-delay:'+(0.05*i)+'s" onclick="openExam(\''+e.id+'\')">';
+    h+='<span class="section-tag">'+esc(e.project||'General')+'</span>';
+    h+='<h3 class="font-playfair text-xl font-semibold mt-1 leading-snug">'+esc(e.title)+'</h3>';
+    if(e.description)h+='<p class="text-sm text-charcoal-100 font-light mt-2 leading-relaxed">'+esc(e.description)+'</p>';
+    h+='<div class="flex flex-wrap gap-2 mt-4 text-[11px] font-bold tracking-wider uppercase">';
+    h+='<span class="px-2.5 py-1 rounded-full bg-gold-100 text-gold-600">'+qs+' Qs</span>';
+    if(mcq)h+='<span class="px-2.5 py-1 rounded-full bg-cream-200 text-charcoal-100">'+mcq+' MCQ</span>';
+    if(tf)h+='<span class="px-2.5 py-1 rounded-full bg-cream-200 text-charcoal-100">'+tf+' T/F</span>';
+    if(sh)h+='<span class="px-2.5 py-1 rounded-full bg-cream-200 text-charcoal-100">'+sh+' Short</span>';
+    h+='<span class="px-2.5 py-1 rounded-full bg-cream-200 text-charcoal-100">'+pts+' pts · pass '+(e.passScore==null?70:e.passScore)+'%</span></div>';
+    h+= best?'<p class="text-xs mt-3 text-gold-600 font-bold">★ Best on this device: '+best.pct+'% ('+best.date+')</p>':'<p class="text-xs mt-3 text-charcoal-50 font-light">Not attempted on this device yet</p>';
+    h+='<div class="mt-4"><span class="btn-gold !py-2">Start exam <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></span></div></div>';
+  }
+  g.innerHTML=h;
+}
+
+/* ---------- take ---------- */
+function showView(v){['listView','takeView','resultView','manageView'].forEach(function(id){document.getElementById(id).classList.add('hidden')});document.getElementById(v).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+function showList(){stopTimer();showView(manageOpen?'manageView':'listView');if(!manageOpen)renderGrid()}
+function openExam(id){
+  var e=null;for(var i=0;i<exams.length;i++)if(exams[i].id===id)e=exams[i];if(!e)return;
+  currentExam=e;answers={};lastResult=null;showView('takeView');
+  document.getElementById('takeProject').textContent=e.project||'General';
+  document.getElementById('takeTitle').textContent=e.title;
+  document.getElementById('takeDesc').textContent=e.description||'';
+  var qs=e.questions||[],pts=0;qs.forEach(function(q){pts+=(+q.points||1)});
+  document.getElementById('takeMeta').textContent=qs.length+' questions · '+pts+' points · pass '+(e.passScore==null?70:e.passScore)+'%'+(e.timeLimitMin?' · '+e.timeLimitMin+' min limit':'')+(e.instructions?' · '+e.instructions:'');
+  renderQuestions(false,null);
+  startTimer(e.timeLimitMin);
+}
+function renderQuestions(review,result){
+  var qs=currentExam.questions||[],h='',lastSec='__none__';
+  for(var i=0;i<qs.length;i++){var q=qs[i],pts=(+q.points||1);
+    if(q.section&&q.section!==lastSec){h+='<div class="mt-6 mb-1"><span class="section-tag">'+esc(q.section)+'</span></div>';lastSec=q.section}
+    h+='<div class="q-block" id="qblock_'+i+'"><div class="flex items-start justify-between gap-3"><p class="font-medium text-[15px] leading-relaxed"><span class="text-gold-500 font-bold mr-2">Q'+(i+1)+'</span>'+esc(q.q)+'</p><span class="flex-shrink-0 text-[11px] font-bold px-2 py-0.5 rounded-full bg-gold-100 text-gold-600">'+pts+' pt'+(pts!==1?'s':'')+'</span></div>';
+    if(q.type==='mcq'){
+      h+='<div class="grid gap-2 mt-3">';
+      for(var o=0;o<q.options.length;o++){var sel=!review&&answers[q.id]===o,cls='opt-label'+(sel?' selected':'');
+        if(review&&result){var det=result.detail[i];if(o===q.answer)cls+=' correct';else if(det.given===o&&!det.ok)cls+=' wrong'}
+        h+='<label class="'+cls+'"><input type="radio" name="q_'+i+'" value="'+o+'" class="mt-1" '+(sel?'checked':'')+(review?' disabled':'')+' onchange="pick(\''+q.id+'\','+o+')"><span class="text-sm"><b class="mr-1">'+letter(o)+')</b> '+esc(q.options[o])+'</span></label>'}
+      h+='</div>';
+    } else if(q.type==='tf'){
+      var gT=!review&&answers[q.id]===true,gF=!review&&answers[q.id]===false,ct='opt-label'+(gT?' selected':'')+(review&&q.answer===true?' correct':'')+(review&&result&&result.detail[i].given===true&&!result.detail[i].ok?' wrong':'');
+      var cf='opt-label'+(gF?' selected':'')+(review&&q.answer===false?' correct':'')+(review&&result&&result.detail[i].given===false&&!result.detail[i].ok?' wrong':'');
+      h+='<div class="grid sm:grid-cols-2 gap-2 mt-3"><label class="'+ct+'"><input type="radio" name="q_'+i+'" value="true" class="mt-1" '+(gT?'checked':'')+(review?' disabled':'')+' onchange="pick(\''+q.id+'\',true)"> <span class="text-sm font-bold">True</span></label><label class="'+cf+'"><input type="radio" name="q_'+i+'" value="false" class="mt-1" '+(gF?'checked':'')+(review?' disabled':'')+' onchange="pick(\''+q.id+'\',false)"> <span class="text-sm font-bold">False</span></label></div>';
+    } else {
+      var val=review?(result.detail[i].given||''):(answers[q.id]||'');
+      if(review)val=result.detail[i].given||'';
+      h+='<textarea class="edit-input mt-3" rows="3" '+(review?'disabled':'')+' placeholder="Type your answer…" oninput="pick(\''+q.id+'\',this.value)">'+esc(review?val:(answers[q.id]||''))+'</textarea>';
+    }
+    if(review&&result){var d=result.detail[i];
+      h+='<div class="mt-3 text-sm rounded-lg px-3 py-2 '+(d.ok?'bg-green-50 border border-green-200':'bg-red-50 border border-red-200')+'">';
+      h+='<b>'+(d.ok?'✓ Correct':'✗ '+d.earned+'/'+d.max+' pts')+'</b>';
+      if(q.explanation)h+=' <span class="font-light">— '+esc(q.explanation)+'</span>';
+      if(q.type==='short'&&q.modelAnswer)h+='<div class="mt-1 font-light"><b>Model answer:</b> '+esc(q.modelAnswer)+'</div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  (review?document.getElementById('reviewList'):document.getElementById('questionList')).innerHTML=h;
+}
+function pick(id,val){answers[id]=val;var blocks=document.querySelectorAll('#questionList .q-block');/* re-highlight via re-render of classes only */
+  var qs=currentExam.questions||[];
+  for(var i=0;i<qs.length;i++){if(qs[i].id!==id)continue;var q=qs[i],block=document.getElementById('qblock_'+i);if(!block)continue;
+    if(q.type==='mcq'){var labels=block.querySelectorAll('.opt-label');for(var o=0;o<labels.length;o++)labels[o].classList.toggle('selected',answers[id]===o)}
+    if(q.type==='tf'){var ls=block.querySelectorAll('.opt-label');if(ls.length===2){ls[0].classList.toggle('selected',answers[id]===true);ls[1].classList.toggle('selected',answers[id]===false)}}
+  }
+}
+function startTimer(mins){stopTimer();var box=document.getElementById('timerBox');if(!mins||mins<=0){box.classList.add('hidden');return}box.classList.remove('hidden');timerEnd=Date.now()+mins*60000;
+  function tick(){var left=timerEnd-Date.now();if(left<=0){document.getElementById('timerText').textContent='00:00';stopTimer();toast('Time is up — auto-submitting','error');submitExam();return}
+    var m=Math.floor(left/60000),s=Math.floor(left%60000/1000);document.getElementById('timerText').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  tick();timerInt=setInterval(tick,1000)}
+function stopTimer(){if(timerInt)clearInterval(timerInt);timerInt=null}
+
+/* ---------- grading ---------- */
+function norm(s){return String(s||'').toLowerCase()}
+function gradeExam(exam,given){
+  var detail=[],score=0,total=0;
+  (exam.questions||[]).forEach(function(q){
+    var max=(+q.points||1),earned=0,ok=false,v=given[q.id];
+    if(q.type==='mcq'){ok=(v===q.answer);earned=ok?max:0}
+    else if(q.type==='tf'){var b=(v===true||v==='true'||v===1);if(v===undefined||v===null||v===''){ok=false}else{ok=(b===!!q.answer)}earned=ok?max:0}
+    else{ /* short: keyword match */
+      var text=norm(v),kws=(q.keywords||[]).map(norm).filter(Boolean),need=+(q.minKeywords||Math.min(2,kws.length||1));
+      var hits=kws.filter(function(k){return k&&text.indexOf(k)>=0});
+      /* de-dupe overlapping hits: count unique keywords */
+      hits=Array.from(new Set(hits));
+      if(!text.trim()){earned=0}
+      else if(kws.length===0){earned=text.length>10?max:0}
+      else{var ratio=hits.length/Math.max(1,Math.min(kws.length,need));earned=Math.round(Math.min(1,ratio)*max);if(hits.length>=need)earned=max}
+      ok=(earned===max);
+    }
+    score+=earned;total+=max;
+    detail.push({id:q.id,given:(v===undefined?'':v),ok:ok,earned:earned,max:max});
+  });
+  var pct=total?Math.round(score/total*100):0;
+  return {score:score,total:total,pct:pct,detail:detail,passed:pct>=(exam.passScore==null?70:exam.passScore)};
+}
+function submitExam(){
+  if(!currentExam)return;
+  var name=document.getElementById('studentName').value.trim();
+  if(!name){toast('Please enter your name before submitting','error');document.getElementById('studentName').focus();return}
+  stopTimer();
+  var r=gradeExam(currentExam,answers);lastResult=r;setBest(currentExam.id,r);
+  saveAttempt(currentExam.id,name,document.getElementById('studentBranch').value.trim(),r);
+  showView('resultView');
+  var ring=document.getElementById('scoreRing'),pct=r.pct;
+  ring.style.background='conic-gradient('+(r.passed?'#34a853':'#ea4335')+' '+pct+'%, #F5EFE3 '+pct+'%)';
+  ring.style.boxShadow='inset 0 0 0 10px #fff';
+  document.getElementById('scorePct').textContent=pct+'%';
+  document.getElementById('scoreFrac').textContent=r.score+' / '+r.total+' points';
+  document.getElementById('resultHeadline').textContent=r.passed?'Passed — nicely done, '+name.split(' ')[0]+'!':'Not yet — keep going, '+name.split(' ')[0]+'!';
+  document.getElementById('resultSub').textContent=(r.passed?'You met the pass mark of '+(currentExam.passScore==null?70:currentExam.passScore)+'% for “'+currentExam.title+'”.':'You need '+(currentExam.passScore==null?70:currentExam.passScore)+'% to pass “'+currentExam.title+'”. Review the answers below and retake.')+' Short answers show model answers for review.';
+  renderQuestions(true,r);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function saveAttempt(examId,name,branch,r){try{var k='soho_attempts_'+examId,a=JSON.parse(localStorage.getItem(k)||'[]');a.push({name:name,branch:branch,pct:r.pct,score:r.score,total:r.total,date:new Date().toLocaleString()});localStorage.setItem(k,JSON.stringify(a.slice(-50)))}catch(e){}}
+function retake(){if(currentExam)openExam(currentExam.id)}
+function backToExam(){if(!currentExam||!lastResult)return;showView('takeView');renderQuestions(false,null);/* keep answers, show review toggle */toast('Review mode — your answers are kept','info')}
+
+/* ---------- manage / builder ---------- */
+function toggleManage(forceBack){
+  if(forceBack===true&&manageOpen){manageOpen=false;document.getElementById('manageBtnLabel').textContent='Manage';showList();return}
+  manageOpen=!manageOpen;
+  document.getElementById('manageBtnLabel').textContent=manageOpen?'Exit':'Manage';
+  if(manageOpen){showView('manageView');refreshEditSelect();if(builderQuestions.length===0&&exams.length)newExamForm();document.getElementById('formatHelp').textContent=templateExam(true)}
+  else showList();
+}
+function refreshEditSelect(){
+  var s=document.getElementById('editSelect'),cur=s.value;
+  s.innerHTML='<option value="">— select exam to edit —</option>'+exams.map(function(e){return '<option value="'+e.id+'">'+esc(e.project||'General')+' — '+esc(e.title)+'</option>'}).join('');
+  if(cur)s.value=cur;
+}
+function newExamForm(){builderId=null;builderQuestions=[];document.getElementById('editSelect').value='';document.getElementById('f_title').value='';document.getElementById('f_project').value='';document.getElementById('f_pass').value=70;document.getElementById('f_time').value=0;document.getElementById('f_desc').value='';document.getElementById('f_instr').value='';renderBuilderQs();toast('New exam — add questions below','info')}
+function loadIntoBuilder(id){if(!id)return;var e=null;for(var i=0;i<exams.length;i++)if(exams[i].id===id)e=exams[i];if(!e)return;
+  builderId=e.id;builderQuestions=JSON.parse(JSON.stringify(e.questions||[]));
+  document.getElementById('f_title').value=e.title||'';document.getElementById('f_project').value=e.project||'';document.getElementById('f_pass').value=(e.passScore==null?70:e.passScore);document.getElementById('f_time').value=(e.timeLimitMin||0);document.getElementById('f_desc').value=e.description||'';document.getElementById('f_instr').value=e.instructions||'';
+  renderBuilderQs();toast('Loaded “'+e.title+'” into editor','info')}
+function duplicateExam(){var v=document.getElementById('editSelect').value;if(!v){toast('Select an exam first','error');return}loadIntoBuilder(v);builderId=null;document.getElementById('editSelect').value='';document.getElementById('f_title').value=document.getElementById('f_title').value+' (copy)';toast('Duplicated — press Publish to save as new','info')}
+function renderBuilderQs(){
+  var box=document.getElementById('builderQs');document.getElementById('qCount').textContent='('+builderQuestions.length+' so far)';
+  if(!builderQuestions.length){box.innerHTML='<p class="text-sm text-charcoal-50 font-light border border-dashed border-gold-300 rounded-xl p-4 text-center">No questions yet — use “+ Add a question” below.</p>';return}
+  var h='';
+  for(var i=0;i<builderQuestions.length;i++){var q=builderQuestions[i];
+    h+='<div class="flex items-start gap-2 p-3 rounded-xl border border-gold-200/50 bg-cream-50"><div class="flex-1 min-w-0"><p class="text-sm font-medium leading-snug"><span class="text-gold-500 font-bold">Q'+(i+1)+' · '+esc(q.type.toUpperCase())+' · '+(+q.points||1)+'pts</span><br>'+esc(q.q)+'</p>';
+    if(q.type==='mcq')h+='<p class="text-xs text-charcoal-50 mt-1">'+q.options.map(function(o,oi){return (oi===q.answer?'<b>★ ':'')+esc(letter(oi)+') '+o)+(oi===q.answer?'</b>':'')}).join(' · ')+'</p>';
+    if(q.type==='tf')h+='<p class="text-xs text-charcoal-50 mt-1">Correct: <b>'+(q.answer?'True':'False')+'</b></p>';
+    if(q.type==='short')h+='<p class="text-xs text-charcoal-50 mt-1">Keywords: '+esc((q.keywords||[]).join(', '))+'</p>';
+    h+='</div><button class="btn-ghost !px-2 !py-1" onclick="moveQ('+i+',-1)">↑</button><button class="btn-ghost !px-2 !py-1" onclick="moveQ('+i+',1)">↓</button><button class="btn-ghost !px-2 !py-1 !text-red-500" onclick="delQ('+i+')">✕</button></div>'}
+  box.innerHTML=h;
+}
+function moveQ(i,d){var j=i+d;if(j<0||j>=builderQuestions.length)return;var t=builderQuestions[i];builderQuestions[i]=builderQuestions[j];builderQuestions[j]=t;renderBuilderQs()}
+function delQ(i){builderQuestions.splice(i,1);renderBuilderQs()}
+function builderTypeChanged(){var t=document.getElementById('n_type').value;document.getElementById('n_mcqWrap').classList.toggle('hidden',t!=='mcq');document.getElementById('n_tfWrap').classList.toggle('hidden',t!=='tf');document.getElementById('n_shortWrap').classList.toggle('hidden',t!=='short')}
+function addQuestionFromForm(){
+  var qtext=document.getElementById('n_q').value.trim();if(!qtext){toast('Write the question text first','error');return}
+  var type=document.getElementById('n_type').value,points=Math.max(1,parseInt(document.getElementById('n_points').value||'1',10)),section=document.getElementById('n_section').value.trim(),explain=document.getElementById('n_explain').value.trim();
+  var q={id:'q_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),type:type,q:qtext,points:points};
+  if(section)q.section=section;if(explain)q.explanation=explain;
+  if(type==='mcq'){
+    var lines=document.getElementById('n_options').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+    if(lines.length<2){toast('Multiple choice needs 2+ options (one per line)','error');return}
+    var ans=parseInt(document.getElementById('n_answerIdx').value||'0',10);
+    lines=lines.map(function(l){if(l.charAt(0)==='*'){ans=lines.indexOf(l);return l.slice(1).trim()}return l.replace(/^[A-D][).\-]\s*/i,'')});
+    if(!(ans>=0&&ans<lines.length)){toast('Answer index out of range','error');return}
+    q.options=lines;q.answer=ans;
+  } else if(type==='tf'){q.answer=(document.getElementById('n_tfAnswer').value==='true')}
+  else{var model=document.getElementById('n_model').value.trim(),kw=document.getElementById('n_keywords').value.split(',').map(function(s){return s.trim()}).filter(Boolean);
+    if(!model){toast('Short answer needs a model answer','error');return}
+    if(!kw.length){toast('Short answer needs keywords for auto-grading','error');return}
+    q.modelAnswer=model;q.keywords=kw;q.minKeywords=Math.min(2,kw.length)}
+  builderQuestions.push(q);
+  document.getElementById('n_q').value='';document.getElementById('n_options').value='';document.getElementById('n_model').value='';document.getElementById('n_keywords').value='';document.getElementById('n_explain').value='';
+  renderBuilderQs();toast('Question '+(type==='mcq'?'MCQ':type==='tf'?'True/False':'short answer')+' added ('+builderQuestions.length+' total)','success');
+}
+function collectBuilderExam(){
+  var title=document.getElementById('f_title').value.trim(),project=document.getElementById('f_project').value.trim();
+  if(!title){toast('Exam title is required','error');return null}
+  if(!project){toast('Project / brand is required','error');return null}
+  if(!builderQuestions.length){toast('Add at least 1 question','error');return null}
+  return {id:builderId||('exam-'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)),title:title,project:project,description:document.getElementById('f_desc').value.trim(),instructions:document.getElementById('f_instr').value.trim(),passScore:Math.max(0,Math.min(100,parseInt(document.getElementById('f_pass').value||'70',10))),timeLimitMin:Math.max(0,parseInt(document.getElementById('f_time').value||'0',10)),questions:builderQuestions};
+}
+function publishBuilder(){
+  var exam=collectBuilderExam();if(!exam)return;
+  setSaveStatus('Publishing…');
+  var exists=false;for(var i=0;i<exams.length;i++)if(exams[i].id===exam.id)exists=true;
+  var next;
+  if(exists){next=exams.map(function(e){return e.id===exam.id?exam:e})}
+  else{next=exams.concat([exam])}
+  fetch(EXAMS_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(next)})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()})
+    .then(function(){exams=next;builderId=exam.id;setSaveStatus('Published ✓');setTimeout(function(){setSaveStatus('')},1500);refreshEditSelect();document.getElementById('editSelect').value=exam.id;renderGrid();toast('Published “'+exam.title+'” — live for the team','success')})
+    .catch(function(e){setSaveStatus('');toast('Publish failed: '+e.message+' (are you on the Netlify deploy?)','error')});
+}
+function deleteExam(){
+  var v=document.getElementById('editSelect').value;if(!v){toast('Select an exam first','error');return}
+  var e=null;for(var i=0;i<exams.length;i++)if(exams[i].id===v)e=exams[i];
+  if(!confirm('Delete "'+(e?e.title:v)+'" for everyone?'))return;
+  var next=exams.filter(function(x){return x.id!==v});
+  fetch(EXAMS_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(next)})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)})
+    .then(function(){exams=next;builderId=null;builderQuestions=[];newExamFormSilent();refreshEditSelect();renderGrid();toast('Deleted','info')})
+    .catch(function(e){toast('Delete failed: '+e.message,'error')});
+}
+function newExamFormSilent(){builderId=null;builderQuestions=[];document.getElementById('editSelect').value='';document.getElementById('f_title').value='';document.getElementById('f_project').value='';document.getElementById('f_pass').value=70;document.getElementById('f_time').value=0;document.getElementById('f_desc').value='';document.getElementById('f_instr').value='';renderBuilderQs()}
+function exportBuilderJSON(){var exam=collectBuilderExam();if(!exam)return;var blob=new Blob([JSON.stringify(exam,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=exam.id+'.json';document.body.appendChild(a);a.click();a.remove();toast('Downloaded JSON','info')}
+function templateExam(asText){
+  var t={id:'example-exam',title:'Example: Brand Certification',project:'Example Brand',description:'Short description for staff.',instructions:'Answer all questions.',passScore:70,timeLimitMin:0,questions:[{id:'q1',section:'Section 1 — Multiple Choice',type:'mcq',q:'What does Alo stand for?',options:['Active, Lifestyle, Outdoors','Air, Land, Ocean','Athletic, Leisure, Original'],answer:1,points:2,explanation:'Alo = Air, Land, Ocean.'},{id:'q2',section:'Section 2 — True or False',type:'tf',q:'Chill line is for high-intensity training.',answer:false,points:2},{id:'q3',section:'Section 3 — Short Answer',type:'short',q:'Conquer vs Chill lines?',modelAnswer:'Conquer = training; Chill = lounge/travel.',keywords:['conquer','training','chill','lounge'],points:6}]};
+  return asText?JSON.stringify(t,null,2):t;
+}
+function downloadTemplate(){var blob=new Blob([JSON.stringify(templateExam(false),null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='exam-template.json';document.body.appendChild(a);a.click();a.remove()}
+function loadJsonIntoForm(){var raw=document.getElementById('jsonBox').value.trim();if(!raw){toast('Paste exam JSON first','error');return}try{var e=JSON.parse(raw);if(Array.isArray(e)){if(e.length===1)e=e[0];else{toast('Paste ONE exam object (not an array)','error');return}}builderId=e.id||null;builderQuestions=JSON.parse(JSON.stringify(e.questions||[]));document.getElementById('f_title').value=e.title||'';document.getElementById('f_project').value=e.project||'';document.getElementById('f_pass').value=(e.passScore==null?70:e.passScore);document.getElementById('f_time').value=(e.timeLimitMin||0);document.getElementById('f_desc').value=e.description||'';document.getElementById('f_instr').value=e.instructions||'';renderBuilderQs();toast('JSON loaded — review then Publish','success')}catch(err){toast('Invalid JSON: '+err.message,'error')}}
+function importJsonFile(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){document.getElementById('jsonBox').value=r.result;loadJsonIntoForm()};r.readAsText(f);ev.target.value=''}
+
+loadExams();
+</script>
+</body>
+</html>
