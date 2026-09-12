@@ -64,6 +64,7 @@ function verifyPassword(pw, stored) {
 }
 
 /* ---------- tokens (HMAC-signed, no server session needed) ---------- */
+// Secret comes from the Netlify AUTH_SECRET env var (production context).
 function secret() {
   return (
     process.env.AUTH_SECRET ||
