@@ -53,17 +53,6 @@ const json = (obj, status = 200) =>
     status,
     headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
   });
-// Storage reads can trail writes briefly; wait until a just-written meta
-// list becomes visible (bounded) so the next user action sees fresh state.
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-async function waitForMeta(store, month, id, wantPresent) {
-  for (let t = 0; t < 5; t++) {
-    const list = (await store.get(metaKey(month), { type: "json" })) || [];
-    const found = list.some((x) => x.id === id);
-    if (found === wantPresent) return;
-    await sleep(1000);
-  }
-}
 const MONTHS = new Set(Array.from({ length: 12 }, (_, i) => String(i)));
 
 export default async (req) => {
@@ -220,7 +209,6 @@ export default async (req) => {
     };
     list.unshift(meta);
     await store.setJSON(metaKey(st.month), list);
-    await waitForMeta(store, st.month, st.id, true);
     for (let i = 0; i < st.chunks; i++) {
       try {
         await store.delete(chunkKey(uploadId, i));
@@ -247,23 +235,17 @@ export default async (req) => {
       for (let mi = 0; mi < 12; mi++) months.push(String(mi));
     }
     let removed = null;
-    let removedMonth = null;
-    for (let attempt = 0; attempt < 3 && !removed; attempt++) {
-      if (attempt > 0) await sleep(1500);
-      for (const mm of months) {
-        const list = (await store.get(metaKey(mm), { type: "json" })) || [];
-        const ix = list.findIndex((x) => x.id === id);
-        if (ix >= 0) {
-          removed = list[ix];
-          removedMonth = mm;
-          list.splice(ix, 1);
-          await store.setJSON(metaKey(mm), list);
-          break;
-        }
+    for (const mm of months) {
+      const list = (await store.get(metaKey(mm), { type: "json" })) || [];
+      const ix = list.findIndex((x) => x.id === id);
+      if (ix >= 0) {
+        removed = list[ix];
+        list.splice(ix, 1);
+        await store.setJSON(metaKey(mm), list);
+        break;
       }
     }
     if (!removed) return json({ error: "File not found" }, 404);
-    await waitForMeta(store, removedMonth, id, false);
     try {
       await store.delete(binKey(id));
     } catch {
