@@ -625,23 +625,36 @@ async function uploadOne(f,month){
         await fetch(FILES_URL,{method:'POST',headers:fileHeaders(),body:JSON.stringify({action:'chunk',uploadId:init.uploadId,index:i,data:b64})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})});
     }
     prog('Finishing '+f.name+'…');
-    await fetch(FILES_URL,{method:'POST',headers:fileHeaders(),body:JSON.stringify({action:'complete',uploadId:init.uploadId})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})});
+    return fetch(FILES_URL,{method:'POST',headers:fileHeaders(),body:JSON.stringify({action:'complete',uploadId:init.uploadId})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})});
 }
 async function handleFiles(files){
     if(!files||!files.length)return;var maxSz=50*1024*1024;
     for(var k=0;k<files.length;k++){var f=files[k];
         if(f.size>maxSz){toast('"'+f.name+'" exceeds 50 MB','error');continue}
         if(!f.size){toast('"'+f.name+'" is empty','error');continue}
-        try{await uploadOne(f,currentModalIdx);toast('Shared with team: '+f.name,'success')}
+        try{var meta=await uploadOne(f,currentModalIdx);rememberMeta(meta.file||meta);toast('Shared with team: '+f.name,'success')}
         catch(e){toast('Failed: '+f.name+' — '+e.message,'error')}
     }
     prog(null);renderAttachments();
+}
+/* Optimistic overlay: storage reads can lag writes by a little, so recently
+   uploaded files show instantly and just-removed ones hide instantly. */
+var pendingMetas=[],removedIds=[];
+function rememberMeta(m){if(!m||!m.id)return;pendingMetas=pendingMetas.filter(function(x){return x.id!==m.id});pendingMetas.unshift(m);pendingMetas=pendingMetas.slice(0,20)}
+function mergeFiles(server){
+    var seen={},out=[];
+    for(var i=0;i<server.length;i++){var f=server[i];if(removedIds.indexOf(f.id)>=0)continue;seen[f.id]=1;out.push(f)}
+    for(var j=0;j<pendingMetas.length;j++){var p=pendingMetas[j];if(!seen[p.id]&&removedIds.indexOf(p.id)<0)out.unshift(p)}
+    pendingMetas=pendingMetas.filter(function(p){return !seen[p.id]});
+    removedIds=removedIds.slice(-100);
+    return out;
 }
 function renderAttachments(){
     if(currentModalIdx<0)return;
     var section=document.getElementById('attachmentsSection'),list=document.getElementById('fileList'),fileZone=document.getElementById('fileZone');
     if(fileZone)fileZone.classList.toggle('hidden',!editMode);
-    fetch(FILES_URL+'?month='+currentModalIdx,{headers:fileHeaders()}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})}).then(function(files){
+    fetch(FILES_URL+'?month='+currentModalIdx,{headers:fileHeaders()}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})}).then(function(server){
+        var files=mergeFiles(server||[]);
         section.classList.remove('hidden');
         if(!files.length){list.innerHTML=editMode?'<p class="text-xs text-charcoal-50 font-light py-2">No files attached yet — add the first one below</p>':'<p class="text-xs text-charcoal-50 font-light py-2">No materials attached yet</p>';return}
         var h='';for(var i=0;i<files.length;i++){var f=files[i],ext=String(f.name||'').split('.').pop().toLowerCase(),ic='other',ii='lucide:file';
@@ -655,7 +668,7 @@ function renderAttachments(){
     }).catch(function(e){list.innerHTML='<p class="text-xs text-red-400 font-light py-2">Could not load attachments ('+e.message+').</p>';section.classList.remove('hidden')});
 }
 function downloadFile(id,name){fetch(FILES_URL+'?id='+encodeURIComponent(id),{headers:fileHeaders()}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.blob()}).then(function(b){var url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download=name||'file';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url)},5000);toast('Downloading: '+(name||'file'),'info')}).catch(function(e){toast('Download failed: '+e.message,'error')})}
-function removeFile(id,name){showConfirm('Remove "'+name+'" for everyone?',function(){fetch(FILES_URL,{method:'POST',headers:fileHeaders(),body:JSON.stringify({action:'delete',id:id,month:currentModalIdx})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})}).then(function(){renderAttachments();toast('Removed: '+name,'info')}).catch(function(e){toast('Remove failed: '+e.message,'error')})})}
+function removeFile(id,name){showConfirm('Remove "'+name+'" for everyone?',function(){removedIds.push(id);pendingMetas=pendingMetas.filter(function(x){return x.id!==id});renderAttachments();fetch(FILES_URL,{method:'POST',headers:fileHeaders(),body:JSON.stringify({action:'delete',id:id,month:currentModalIdx})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})}).then(function(){renderAttachments();toast('Removed: '+name,'info')}).catch(function(e){removedIds=removedIds.filter(function(x){return x!==id});renderAttachments();toast('Remove failed: '+e.message,'error')})})}
 
 /* ===== MODAL ===== */
 function openModal(idx){
