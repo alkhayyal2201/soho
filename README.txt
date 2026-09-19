@@ -15,8 +15,9 @@ How content is stored
 - On first request after deploy (or when the blob is empty), the function
   seeds itself from the bundled data.json.
 - After that, data.json is no longer the source of truth — the blob is.
-- File attachments are still stored in the visitor's IndexedDB (browser-only,
-  not shared between visitors).
+- File attachments are shared with the whole team: uploads go through
+  /api/files (chunked, up to 50 MB each) into Netlify Blobs, and every
+  signed-in user sees and can download them. Upload/delete needs Edit mode.
 
 Editing
 -------
